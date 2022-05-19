@@ -47,8 +47,10 @@
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1">정보수정</b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="primary" @click="moveMemberModify" class="mr-1"
+            >정보수정</b-button
+          >
+          <b-button variant="danger" @click="deleteMember">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -66,6 +68,23 @@ export default {
   components: {},
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+  },
+  methods: {
+    moveMemberModify() {
+      this.$router.replace({
+        name: "memberModify",
+        params: { userid: this.userInfo.userid },
+      });
+    },
+    deleteMember() {
+      if (confirm("탈퇴하시겠습니까? 탈퇴 후에는 복원이 불가능합니다")) {
+        if (alert("탈퇴되었습니다")) {
+          this.deleteMember(this.userInfo.userid, () => {
+            this.$router.push({ name: "home" });
+          });
+        }
+      }
+    },
   },
 };
 </script>

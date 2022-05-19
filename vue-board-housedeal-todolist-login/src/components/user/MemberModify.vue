@@ -2,10 +2,10 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert variant="secondary" show><h3>회원가입</h3></b-alert>
+        <b-alert show><h3>회원 정보 수정</h3></b-alert>
       </b-col>
     </b-row>
-    <member-input-item type="join" />
+    <member-input-item type="modify" />
   </b-container>
 </template>
 
@@ -13,7 +13,7 @@
 import MemberInputItem from "@/components/user/item/MemberInputItem.vue";
 
 export default {
-  name: "JoinMember",
+  name: "MemberModify",
   components: {
     MemberInputItem,
   },
