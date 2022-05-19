@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.vue.mapper.CommentMapper">
+
+	<!-- articleno에 해당하는 댓글 조회 -->
+	<select id="list" parameterType="int" resultType="commentDto">
+		select commentno, userid, comment, regtime, articleno
+		from comments
+		where articleno = #{articleno}
+		order by regtime
+	</select>
+
+	<!-- 댓글 정보 등록 -->
+	<insert id="create" parameterType="commentDto">
+		insert into comments(
+		commentno, userid, comment, regtime, articleno
+		) values (
+		#{commentno}, #{userid}, #{comment}, now(), #{articleno}
+		)
+	</insert>
+
+	<!-- 댓글 정보 수정 -->
+	<update id="modify" parameterType="commentDto">
+		<![CDATA[
+		update comments
+		set comment = #{comment}
+		where commentno = #{commentno}
+		]]>
+	</update>
+
+	<!-- commentno에 따른 책 정보 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete
+		from comments
+		where commentno = #{commentno}
+	</delete>
+
+	<!-- commentno에 해당하는 댓글 조회 -->
+	<select id="getComment" parameterType="int" resultType="commentDto">
+		select commentno, userid, comment, regtime, articleno
+		from comments
+		where commentno = #{commentno}
+	</select>
+
+</mapper>
+

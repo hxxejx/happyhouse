@@ -24,7 +24,7 @@
           <b-nav-item href="#"
             ><router-link :to="{ name: 'board' }" class="link"
               ><b-icon icon="journal" font-scale="1.5"></b-icon>
-              게시판</router-link
+              Q&A</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"

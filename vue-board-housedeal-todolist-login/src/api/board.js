@@ -25,4 +25,25 @@ function deleteArticle(articleno, success, fail) {
   api.delete(`/board/${articleno}`).then(success).catch(fail);
 }
 
-export { listArticle, writeArticle, getArticle, modifyArticle, deleteArticle };
+function searchArticleByNo(word, success, fail) {
+  api.get(`/board/search/no/${word}`).then(success).catch(fail);
+}
+
+function searchArticleBySubject(word, success, fail) {
+  api.get(`/board/search/subject/${word}`).then(success).catch(fail);
+}
+
+function countUpArticle(articleno, success, fail) {
+  api.get(`/board/hit/${articleno}`).then(success).catch(fail);
+}
+
+export {
+  listArticle,
+  writeArticle,
+  getArticle,
+  modifyArticle,
+  deleteArticle,
+  searchArticleByNo,
+  searchArticleBySubject,
+  countUpArticle,
+};

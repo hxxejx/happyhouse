@@ -102,6 +102,21 @@ const routes = [
     beforeEnter: onlyAuthUser,
     component: () => import("@/views/TodoView.vue"),
   },
+  {
+    path: "/comment/list/:articleno",
+    name: "commentList",
+    component: () => import("@/components/comment/CommentList.vue"),
+  },
+  {
+    path: "/comment/modify/:commentno",
+    name: "commentModify",
+    component: () => import("@/components/comment/CommentModify.vue"),
+  },
+  {
+    path: "/comment/delete/:commentno",
+    name: "commentDelete",
+    component: () => import("@/components/comment/CommentDelete.vue"),
+  },
 ];
 
 const router = new VueRouter({

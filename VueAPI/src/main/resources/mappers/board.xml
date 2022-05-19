@@ -7,48 +7,62 @@
 	<!-- 게시글 전체 조회 -->
 	<select id="selectBoard" resultType="board">
 		select articleno, userid, subject, content, hit, regtime
-		from board 
+		from board
 		order by articleno desc
 	</select>
-	
+
 	<!-- 게시글 상세 조회 -->
 	<select id="selectBoardByNo" resultType="board">
 		select articleno, subject, userid, content, hit, regtime
-		from board 
+		from board
 		where articleno = #{articleno}
 	</select>
-	
-	<!-- 게시글 조회수 증가 -->
-	<update id="updateHit" parameterType="int">
-		update board
-		set hit = hit + 1
-		where articleno = #{articleno}
-	</update>
 
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard" parameterType="board">
 		insert into board(
-			subject, userid, content
+		subject, userid, content
 		) values (
-			#{subject}, #{userid}, #{content}
+		#{subject}, #{userid}, #{content}
 		)
 	</insert>
-	
+
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="board">
-		update board 
-		   set subject = #{subject}, 
-		   	   userid = #{userid}, 
-		   	   content = #{content}
-		 where articleno = #{articleno}
+		update board
+		set subject = #{subject},
+		userid = #{userid},
+		content = #{content}
+		where articleno = #{articleno}
 	</update>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
-		delete 
-		from board 
+		delete
+		from board
 		where articleno = #{articleno}
 	</delete>
+
+	<!-- 글번호로 게시글 검색 -->
+	<select id="searchBoardByNo" parameterType="int" resultType="board">
+		select articleno, userid, subject, content, hit, regtime
+		from board
+		where articleno = #{articleno}
+	</select>
+
+	<!-- 제목으로 게시글 검색 -->
+	<select id="searchBoardBySubject" parameterType="string" resultType="board">
+		select articleno, userid, subject, content, hit, regtime
+		from board
+		where subject like concat('%', #{subject}, '%')
+	</select>
+
+	<!-- 게시글 조회 수 증가 -->
+	<update id="countUpBoard" parameterType="int">
+		update board
+		set hit = hit + 1
+		where articleno = #{articleno}
+	</update>
 
 </mapper>
 

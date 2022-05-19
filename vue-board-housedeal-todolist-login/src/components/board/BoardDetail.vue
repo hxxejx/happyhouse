@@ -9,7 +9,7 @@
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="listArticle">목록</b-button>
       </b-col>
-      <b-col class="text-right">
+      <b-col class="text-right" v-if="this.isAdmin">
         <b-button
           variant="outline-info"
           size="sm"
@@ -37,21 +37,30 @@
         </b-card>
       </b-col>
     </b-row>
+    <comment-view :articleno="this.$route.params.articleno"></comment-view>
   </b-container>
 </template>
 
 <script>
+/* eslint-disable */
 // import moment from "moment";
 import { getArticle, deleteArticle } from "@/api/board";
+import CommentView from "@/views/CommentView.vue";
+import { mapState, mapActions } from "vuex";
+
+const memberStore = "memberStore";
+const boardStore = "boardStore";
 
 export default {
   name: "BoardDetail",
   data() {
     return {
       article: {},
+      isAdmin: false,
     };
   },
   computed: {
+    ...mapState(memberStore, ["userInfo"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -59,17 +68,29 @@ export default {
     },
   },
   created() {
+    this.countUpArticle(this.$route.params.articleno);
     getArticle(
       this.$route.params.articleno,
       (response) => {
         this.article = response.data;
+        this.article.hit += 1;
       },
       (error) => {
         console.log("삭제시 에러발생!!", error);
-      },
+      }
     );
   },
+  updated() {
+    if (
+      this.userInfo.userid === "admin" ||
+      this.userInfo.userid === this.article.userid
+    ) {
+      this.isAdmin = true;
+    }
+    // console.log(this.article);
+  },
   methods: {
+    ...mapActions(boardStore, ["countUpArticle"]),
     listArticle() {
       this.$router.push({ name: "boardList" });
     },
@@ -87,6 +108,9 @@ export default {
         });
       }
     },
+  },
+  components: {
+    CommentView,
   },
   // filters: {
   //   dateFormat(regtime) {

@@ -11,16 +11,16 @@ import com.ssafy.vue.mapper.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-	
-    @Autowired
+
+	@Autowired
 	private BoardMapper boardMapper;
 
-    @Override
+	@Override
 	public List<Board> retrieveBoard() {
 		return boardMapper.selectBoard();
 	}
-    
-  	@Override
+
+	@Override
 	public boolean writeBoard(Board board) {
 		return boardMapper.insertBoard(board) == 1;
 	}
@@ -28,11 +28,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board detailBoard(int articleno) {
 		return boardMapper.selectBoardByNo(articleno);
-	}
-	
-	@Override
-	public void updateHit(int articleno) {
-		boardMapper.updateHit(articleno);
 	}
 
 	@Override
@@ -46,4 +41,20 @@ public class BoardServiceImpl implements BoardService {
 	public boolean deleteBoard(int articleno) {
 		return boardMapper.deleteBoard(articleno) == 1;
 	}
+
+	@Override
+	public List<Board> searchBoardByNo(int articleno) {
+		return boardMapper.searchBoardByNo(articleno);
+	}
+
+	@Override
+	public List<Board> searchBoardBySubject(String subject) {
+		return boardMapper.searchBoardBySubject(subject);
+	}
+
+	@Override
+	public boolean countUpBoard(int articleno) {
+		return boardMapper.countUpBoard(articleno) == 1;
+	}
+
 }

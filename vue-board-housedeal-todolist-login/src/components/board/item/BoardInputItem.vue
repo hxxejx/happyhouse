@@ -60,6 +60,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { writeArticle, getArticle, modifyArticle } from "@/api/board";
 import { mapState } from "vuex";
 
@@ -96,7 +97,7 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
       this.isUserid = true;
     } else {
@@ -152,7 +153,7 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     modifyArticle() {
@@ -174,7 +175,7 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     moveList() {
