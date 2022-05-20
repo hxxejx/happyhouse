@@ -23,5 +23,20 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto userInfo(String userid) throws Exception {
 		return memberMapper.userInfo(userid);
 	}
+	
+	@Override
+	public boolean joinMember(MemberDto memberDto) throws Exception {
+		return memberMapper.joinMember(memberDto) == 1;
+	}
+	
+	@Override
+	public boolean updateMember(MemberDto memberDto) throws Exception {
+		return memberMapper.updateMember(memberDto) == 1;
+	}
+	
+	@Override
+	public boolean deleteMember(String userid) throws Exception {
+		return memberMapper.deleteMember(userid) == 1;
+	}
 
 }
