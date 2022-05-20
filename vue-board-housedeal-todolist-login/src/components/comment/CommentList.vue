@@ -7,15 +7,17 @@
         :key="comment.commentno"
         v-bind="comment"
         :articleno="articleno"
+        :check="check"
       />
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { /*mapState,*/ mapActions } from "vuex";
 import CommentListItem from "@/components/comment/item/CommentListItem";
 // import CommentModify from "@/components/comment/CommentModify.vue";
+import { getCommentList } from "@/api/comment";
 
 const commentStore = "commentStore";
 
@@ -28,18 +30,35 @@ export default {
   data() {
     return {
       isModify: false,
+      comments: [],
     };
   },
   computed: {
-    ...mapState(commentStore, ["comments"]),
+    // ...mapState(commentStore, ["comments"]),
   },
   props: {
     articleno: String,
+    check: Number,
   },
   created() {
+    getCommentList(
+      this.check,
+      this.articleno,
+      ({ data }) => {
+        // commit("SET_COMMENT_LIST", data);
+        this.comments = data;
+      },
+      (error) => {
+        console.log(error); // eslint-disable-next-line
+      }
+    );
     // this.comments = [];
     // console.log("cL" + this.articleno);
-    this.getCommentList(this.articleno);
+    // let data = {
+    //   check: this.check,
+    //   articleno: this.articleno,
+    // };
+    // this.getCommentList(data);
   },
   methods: {
     ...mapActions(commentStore, ["getCommentList"]),

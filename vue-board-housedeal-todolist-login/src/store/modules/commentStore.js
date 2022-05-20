@@ -25,11 +25,12 @@ const commentStore = {
     },
   },
   actions: {
-    getCommentList: ({ commit }, articleno) => {
-      // console.log("com" + articleno);
+    getCommentList: ({ commit }, data) => {
+      // console.log("com" + data.articleno);
       // console.log("actions");
       getCommentList(
-        articleno,
+        data.check,
+        data.articleno,
         ({ data }) => {
           commit("SET_COMMENT_LIST", data);
         },
@@ -62,6 +63,7 @@ const commentStore = {
       //   }
       //   alert(msg);
       // });
+      // alert("!");
     },
 
     getComment: ({ commit }, commentno) => {

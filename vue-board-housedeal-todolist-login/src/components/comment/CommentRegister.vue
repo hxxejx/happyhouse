@@ -56,9 +56,11 @@ export default {
   props: {
     // type: { type: String },
     articleno: Number,
+    check: Number,
   },
   created() {
     // console.log(this.userInfo);
+    // console.log(this.check);
     this.comment.userid = this.userInfo.userid;
     if (this.userInfo.userid === "admin") {
       this.isAdmin = true;
@@ -88,8 +90,9 @@ export default {
         userid: this.comment.userid,
         comment: this.comment.comment,
         articleno: this.articleno,
+        check: this.check,
       };
-
+      // console.log(comment);
       this.writeComment(comment);
       this.refreshList();
     },
@@ -98,7 +101,7 @@ export default {
       // this.getCommentList(this.article.articleno);
       this.$router.go({
         name: "commentList",
-        params: { articleno: this.articleno },
+        params: { articleno: this.articleno, check: this.check },
       });
     },
   },

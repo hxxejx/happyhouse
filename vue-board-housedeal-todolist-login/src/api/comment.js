@@ -2,8 +2,8 @@ import { apiInstance } from "./index.js";
 
 const api = apiInstance();
 
-function getCommentList(articleno, success, fail) {
-  api.get(`/comment/${articleno}`).then(success).catch(fail);
+function getCommentList(check, articleno, success, fail) {
+  api.get(`/comment/${check}/${articleno}`).then(success).catch(fail);
 }
 
 function writeComment(comment, success, fail) {

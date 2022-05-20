@@ -1,8 +1,11 @@
 <template>
   <div>
     <!-- <comment-input-item type="register"></comment-input-item> -->
-    <comment-register :articleno="articleno"></comment-register>
-    <comment-list :articleno="articleno"></comment-list>
+    <comment-register
+      :articleno="articleno"
+      :check="checkNum"
+    ></comment-register>
+    <comment-list :articleno="articleno" :check="checkNum"></comment-list>
   </div>
 </template>
 
@@ -19,6 +22,20 @@ export default {
   },
   props: {
     articleno: Number,
+    check: String,
+  },
+  data() {
+    return {
+      checkNum: 0,
+    };
+  },
+  created() {
+    // console.log("CV" + this.check);
+    if (this.check === "board") {
+      this.checkNum = 1;
+    } else if (this.check === "notice") {
+      this.checkNum = 2;
+    }
   },
 };
 </script>

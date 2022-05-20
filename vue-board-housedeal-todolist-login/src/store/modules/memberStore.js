@@ -46,7 +46,7 @@ const memberStore = {
             commit("SET_IS_LOGIN_ERROR", true);
           }
         },
-        () => {},
+        () => {}
       );
     },
     getUserInfo({ commit }, token) {
@@ -62,7 +62,7 @@ const memberStore = {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     joinMember: (context, comment) => {

@@ -39,7 +39,7 @@
     </b-row>
     <comment-view
       :articleno="this.$route.params.articleno"
-      check="board"
+      check="notice"
     ></comment-view>
   </b-container>
 </template>
@@ -47,15 +47,15 @@
 <script>
 /* eslint-disable */
 // import moment from "moment";
-import { getArticle, deleteArticle } from "@/api/board";
+import { getArticle, deleteArticle } from "@/api/notice";
 import CommentView from "@/views/CommentView.vue";
 import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
-const boardStore = "boardStore";
+const noticeStore = "noticeStore";
 
 export default {
-  name: "BoardDetail",
+  name: "NoticeDetail",
   data() {
     return {
       article: {
@@ -99,21 +99,21 @@ export default {
     // console.log(this.article);
   },
   methods: {
-    ...mapActions(boardStore, ["countUpArticle"]),
+    ...mapActions(noticeStore, ["countUpArticle"]),
     listArticle() {
-      this.$router.push({ name: "boardList" });
+      this.$router.push({ name: "noticeList" });
     },
     moveModifyArticle() {
       this.$router.replace({
-        name: "boardModify",
+        name: "noticeModify",
         params: { articleno: this.article.articleno },
       });
-      //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
+      //   this.$router.push({ path: `/notice/modify/${this.article.articleno}` });
     },
     deleteArticle() {
       if (confirm("정말로 삭제?")) {
         deleteArticle(this.article.articleno, () => {
-          this.$router.push({ name: "boardList" });
+          this.$router.push({ name: "noticeList" });
         });
       }
     },

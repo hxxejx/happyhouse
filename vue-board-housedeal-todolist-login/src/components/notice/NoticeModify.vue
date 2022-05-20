@@ -2,20 +2,20 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>글작성</h3></b-alert>
+        <b-alert show><h3>글수정</h3></b-alert>
       </b-col>
     </b-row>
-    <board-input-item type="register" />
+    <notice-input-item type="modify" />
   </b-container>
 </template>
 
 <script>
-import BoardInputItem from "@/components/board/item/BoardInputItem.vue";
+import NoticeInputItem from "@/components/notice/item/NoticeInputItem.vue";
 
 export default {
-  name: "BoardRegister",
+  name: "NoticeModify",
   components: {
-    BoardInputItem,
+    NoticeInputItem,
   },
 };
 </script>

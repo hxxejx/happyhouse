@@ -123,6 +123,37 @@ const routes = [
     name: "commentDelete",
     component: () => import("@/components/comment/CommentDelete.vue"),
   },
+  {
+    path: "/notice",
+    name: "notice",
+    component: () => import("@/views/NoticeView.vue"),
+    redirect: "/notice/list",
+    children: [
+      {
+        path: "list",
+        name: "noticeList",
+        component: () => import("@/components/notice/NoticeList.vue"),
+      },
+      {
+        path: "write",
+        name: "noticeRegister",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/notice/NoticeRegister.vue"),
+      },
+      {
+        path: "detail/:articleno",
+        name: "noticeDetail",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/notice/NoticeDetail.vue"),
+      },
+      {
+        path: "modify/:articleno",
+        name: "noticeModify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/notice/NoticeModify.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

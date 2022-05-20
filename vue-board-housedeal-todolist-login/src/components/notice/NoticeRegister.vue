@@ -5,17 +5,17 @@
         <b-alert show><h3>글작성</h3></b-alert>
       </b-col>
     </b-row>
-    <board-input-item type="register" />
+    <notice-input-item type="register" />
   </b-container>
 </template>
 
 <script>
-import BoardInputItem from "@/components/board/item/BoardInputItem.vue";
+import NoticeInputItem from "@/components/notice/item/NoticeInputItem.vue";
 
 export default {
-  name: "BoardRegister",
+  name: "NoticeRegister",
   components: {
-    BoardInputItem,
+    NoticeInputItem,
   },
 };
 </script>

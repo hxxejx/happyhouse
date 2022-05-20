@@ -39,6 +39,7 @@ export default {
     comment: String,
     regtime: String,
     articleno: Number,
+    check: Number,
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
@@ -87,7 +88,11 @@ export default {
       if (confirm("삭제 하시겠습니까?")) {
         this.deleteComment(this.nowcomment.commentno);
         alert("삭제가 완료되었습니다.");
-        this.getCommentList(this.nowcomment.articleno);
+        let data = {
+          check: this.check,
+          articleno: this.articleno,
+        };
+        this.getCommentList(data);
         // this.$router.replace({
         //   name: "commentDelete",
         //   params: { commentno: this.commentno, articleno: this.articleno },
