@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.vue.mapper.NoticeMapper">
+
+	<!-- 게시글 등록 -->
+	<insert id="registerArticle" parameterType="NoticeDto">
+		insert into notice (userid, subject, content, regtime)
+		values (#{userid}, #{subject}, #{content}, now())
+		<selectKey resultType="int" keyProperty="articleno" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<!-- <insert id="registerFile" parameterType="NoticeDto"> insert into file_info (articleno, savefolder, originfile, savefile) values <foreach collection="fileInfos" item="fileinfo" separator=" , "> (#{articleNo}, 
+		#{fileinfo.saveFolder}, #{fileinfo.originFile}, #{fileinfo.saveFile}) </foreach> </insert> -->
+
+	<resultMap type="NoticeDto" id="articleList">
+		<result column="articleno" property="articleno" />
+		<result column="userid" property="userid" />
+		<result column="username" property="username" />
+		<result column="subject" property="subject" />
+		<result column="content" property="content" />
+		<result column="regtime" property="regtime" />
+		<collection property="fileInfos" column="articleno=articleno" javaType="list" ofType="FileInfoDto" select="fileInfoList" />
+	</resultMap>
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == subject">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != subject">
+				and ${key} = #{word}
+			</if>
+		</if>
+	</sql>
+
+	<!-- <select id="listArticle" parameterType="map" resultMap="articleList"> select g.articleno, g.userid, g.subject, g.content, g.regtime, m.username from notice g, ssafy_member m where g.userid = m.userid 
+		<include refid="search"></include> order by g.articleno desc limit #{start}, #{spp} </select> -->
+
+	<!-- 게시글 전체 조회 -->
+	<select id="listArticle" resultType="NoticeDto">
+		select articleno, userid, subject, content, hit, regtime
+		from notice
+		order by articleno desc
+	</select>
+
+	<!-- 게시글 상세 조회 -->
+	<select id="selectNoticeByNo" resultType="NoticeDto">
+		select articleno, subject, userid, content, hit, regtime
+		from notice
+		where articleno = #{articleno}
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="updateArticle" parameterType="NoticeDto">
+		update notice
+		set subject = #{subject}, content = #{content}
+		where articleno = #{articleno}
+	</update>
+
+	<!-- 게시글 조회 수 증가 -->
+	<update id="countUpNotice" parameterType="int">
+		update notice
+		set hit = hit + 1
+		where articleno = #{articleno}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+		delete
+		from notice
+		where articleno = #{articleno}
+	</delete>
+
+	<!-- 글번호로 게시글 검색 -->
+	<select id="searchNoticeByNo" parameterType="int" resultType="NoticeDto">
+		select articleno, userid, subject, content, hit, regtime
+		from notice
+		where articleno = #{articleno}
+	</select>
+
+	<!-- 제목으로 게시글 검색 -->
+	<select id="searchNoticeBySubject" parameterType="string" resultType="NoticeDto">
+		select articleno, userid, subject, content, hit, regtime
+		from notice
+		where subject like concat('%', #{subject}, '%')
+	</select>
+
+	<select id="fileInfoList" resultType="FileInfoDto">
+		select savefolder, originfile, savefile
+		from file_info
+		where articleno = #{articleno}
+	</select>
+
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		select count(articleno)
+		from notice
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+
+	<select id="getArticle" parameterType="int" resultType="NoticeDto">
+		select articleno, subject, content
+		from notice
+		where articleno = #{articleno}
+	</select>
+
+	<delete id="deleteFile" parameterType="int">
+		delete
+		from file_info
+		where articleno = #{articleno}
+	</delete>
+
+	<delete id="deleteArticle" parameterType="int">
+		delete from notice
+		where articleno = #{articleno}
+	</delete>
+
+	<select id="search" parameterType="int" resultMap="articleList">
+		select g.articleno, g.userid, g.subject, g.content, g.regtime, m.username
+		from notice g, ssafy_member m
+		where articleno = #{articleno}
+	</select>
+
+</mapper>

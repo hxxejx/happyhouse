@@ -16,6 +16,8 @@ public class CommentDto {
 	private String regtime;
 	@ApiModelProperty(value = "게시글번호")
 	private int articleno;
+	@ApiModelProperty(value = "게시판 확인")
+	private int check;
 
 	public int getCommentno() {
 		return commentno;
@@ -57,10 +59,18 @@ public class CommentDto {
 		this.articleno = articleno;
 	}
 
+	public int getCheck() {
+		return check;
+	}
+
+	public void setCheck(int check) {
+		this.check = check;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentDto [commentno=" + commentno + ", userid=" + userid + ", comment=" + comment + ", regtime="
-				+ regtime + ", articleno=" + articleno + "]";
+				+ regtime + ", articleno=" + articleno + ", check=" + check + "]";
 	}
 
 }

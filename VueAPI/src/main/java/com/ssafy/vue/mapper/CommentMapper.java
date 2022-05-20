@@ -9,7 +9,7 @@ import com.ssafy.vue.dto.CommentDto;
 @Mapper
 public interface CommentMapper {
 
-	List<CommentDto> list(int articleno);
+	List<CommentDto> list(int check, int articleno);
 
 	int create(CommentDto commentDto);
 

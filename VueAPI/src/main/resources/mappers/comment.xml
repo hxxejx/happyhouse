@@ -7,18 +7,19 @@
 
 	<!-- articleno에 해당하는 댓글 조회 -->
 	<select id="list" parameterType="int" resultType="commentDto">
-		select commentno, userid, comment, regtime, articleno
+		select commentno, userid, comment, regtime, articleno, `check`
 		from comments
-		where articleno = #{articleno}
+		where `check` = #{check}
+		and articleno = #{articleno}
 		order by regtime
 	</select>
 
 	<!-- 댓글 정보 등록 -->
 	<insert id="create" parameterType="commentDto">
 		insert into comments(
-		commentno, userid, comment, regtime, articleno
+		commentno, userid, comment, regtime, articleno, `check`
 		) values (
-		#{commentno}, #{userid}, #{comment}, now(), #{articleno}
+		#{commentno}, #{userid}, #{comment}, now(), #{articleno}, #{check}
 		)
 	</insert>
 

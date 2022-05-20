@@ -15,8 +15,8 @@ public class CommentServiceImpl implements CommentService {
 	private CommentMapper commentMapper;
 
 	@Override
-	public List<CommentDto> list(int articleno) {
-		return commentMapper.list(articleno);
+	public List<CommentDto> list(int check, int articleno) {
+		return commentMapper.list(check, articleno);
 	}
 
 	@Override
@@ -38,5 +38,5 @@ public class CommentServiceImpl implements CommentService {
 	public CommentDto getComment(int commentno) {
 		return commentMapper.getComment(commentno);
 	}
-	
+
 }

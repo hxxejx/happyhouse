@@ -35,10 +35,11 @@ public class CommentController {
 	CommentService commentService;
 
 	@ApiOperation(value = "articleno에 해당하는 댓글 목록을 반환한다.", response = List.class)
-	@GetMapping("{articleno}")
-	public ResponseEntity<List<CommentDto>> listComment(@PathVariable("articleno") int articleno) {
+	@GetMapping("/{check}/{articleno}")
+	public ResponseEntity<List<CommentDto>> listComment(@PathVariable("check") int check,
+			@PathVariable("articleno") int articleno) {
 		logger.debug("listComment - 호출");
-		return new ResponseEntity<>(commentService.list(articleno), HttpStatus.OK);
+		return new ResponseEntity<>(commentService.list(check, articleno), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "새로운 댓글을 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
@@ -73,7 +74,7 @@ public class CommentController {
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
-	
+
 	@ApiOperation(value = "commentno에 해당하는 댓글을 반환한다.", response = List.class)
 	@GetMapping("/get/{commentno}")
 	public ResponseEntity<CommentDto> getComment(@PathVariable("commentno") int commentno) {
