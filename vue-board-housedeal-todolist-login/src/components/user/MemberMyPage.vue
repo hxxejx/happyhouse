@@ -79,7 +79,11 @@ export default {
     },
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     deleteMember() {
-      if (confirm("탈퇴하시겠습니까? 탈퇴 후에는 복원이 불가능합니다")) {
+      if (
+        confirm(
+          "탈퇴 시 작성한 글과 댓글이 모두 삭제되며, 복원이 불가능합니다.\n탈퇴하시겠습니까?",
+        )
+      ) {
         deleteMember(this.userInfo.userid, () => {
           alert("탈퇴가 완료되었습니다");
           this.SET_IS_LOGIN(false);
