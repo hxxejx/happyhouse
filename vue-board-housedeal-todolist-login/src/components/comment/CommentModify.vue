@@ -7,7 +7,7 @@
             <b-form-input
               id="userid"
               :disabled="isUserid"
-              v-model="comment.userid"
+              v-model="nowcomment.userid"
               type="text"
               required
               readonly
@@ -16,13 +16,16 @@
           <b-form-group id="content-group" label="내용:" label-for="comment">
             <b-form-textarea
               id="comment"
-              v-model="comment.comment"
+              v-model="nowcomment.comment"
               placeholder="내용 입력..."
               rows="5"
               max-rows="15"
             ></b-form-textarea>
           </b-form-group>
           <b-button type="submit" variant="primary" class="m-1">수정</b-button>
+          <b-button variant="primary" class="m-1" @click="cancleModify"
+            >취소</b-button
+          >
         </b-form>
       </b-col>
       <!-- <comment-list></comment-list> -->
@@ -32,7 +35,7 @@
 
 <script>
 // import CommentInputItem from "@/components/comment/item/CommentInputItem.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions /*mapState */ } from "vuex";
 
 const commentStore = "commentStore";
 
@@ -40,42 +43,50 @@ export default {
   name: "CommentModify",
   data() {
     return {
-      // nowcomment: {
-      //   userid: "",
-      //   comment: "",
-      // },
+      nowcomment: {
+        userid: "",
+        comment: "",
+      },
       isUserid: false,
     };
   },
   computed: {
-    ...mapState(commentStore, [/*"article",*/ "comment"]),
+    // ...mapState(commentStore, [/*"article",*/ "comment"]),
   },
   props: {
     // type: { type: String },
+    commentno: Number,
+    articleno: Number,
+    userid: String,
+    comment: String,
   },
   created() {
+    this.nowcomment.userid = this.userid;
+    this.nowcomment.comment = this.comment;
+
     // console.log(this.$route.params.commentno);
     // console.log(this.comment);
     // console.log(this.$route.params.articleno);
-    this.getComment(this.$route.params.commentno);
+    // this.getComment(this.$route.params.commentno);
+    // this.getComment(this.commentno);
   },
   methods: {
     ...mapActions(commentStore, [
       // "writeComment",
       // "getCommentList",
-      "getComment",
+      // "getComment",
       "modifyComment",
     ]),
     onSubmit(event) {
       event.preventDefault();
       let err = true;
       let msg = "";
-      !this.comment.userid &&
+      !this.nowcomment.userid &&
         ((msg = "작성자 입력해주세요"),
         (err = false),
         this.$refs.userid.focus());
       err &&
-        !this.comment.comment &&
+        !this.nowcomment.comment &&
         ((msg = "내용 입력해주세요"),
         (err = false),
         this.$refs.comment.focus());
@@ -85,10 +96,10 @@ export default {
     modify() {
       // console.log("!");
       let comment = {
-        commentno: this.comment.commentno,
-        userid: this.comment.userid,
-        comment: this.comment.comment,
-        articleno: this.$route.params.articleno,
+        commentno: this.commentno,
+        userid: this.nowcomment.userid,
+        comment: this.nowcomment.comment,
+        articleno: this.articleno,
       };
       this.modifyComment(comment);
       // this.editArticle(this.article);
@@ -96,11 +107,17 @@ export default {
       this.refreshList();
     },
     refreshList() {
-      this.$router.push({
-        name: "boardDetail",
-        params: { articleno: this.$route.params.articleno },
-      });
+      // this.$router.push({
+      //   name: "boardDetail",
+      //   params: { articleno: this.$route.params.articleno },
+      // });
       // this.getCommentList(this.article.articleno);
+      this.$emit("changed", {
+        comment: this.nowcomment.comment,
+      });
+    },
+    cancleModify() {
+      this.$emit("cancle-modify");
     },
   },
   components: {
