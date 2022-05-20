@@ -45,7 +45,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 // import moment from "moment";
 import { getArticle, deleteArticle } from "@/api/board";
 import CommentView from "@/views/CommentView.vue";
@@ -86,7 +85,7 @@ export default {
       },
       (error) => {
         console.log("삭제시 에러발생!!", error);
-      }
+      },
     );
   },
   updated() {

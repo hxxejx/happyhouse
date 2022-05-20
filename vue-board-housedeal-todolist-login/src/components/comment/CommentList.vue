@@ -49,8 +49,8 @@ export default {
         this.comments = data;
       },
       (error) => {
-        console.log(error); // eslint-disable-next-line
-      }
+        console.log(error);
+      },
     );
     // this.comments = [];
     // console.log("cL" + this.articleno);

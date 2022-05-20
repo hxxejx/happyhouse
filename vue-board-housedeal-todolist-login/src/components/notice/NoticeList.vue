@@ -75,7 +75,7 @@ export default {
     //   },
     //   (error) => {
     //     console.log(error);
-    //     // eslint-disable-next-line
+    //
     //   }
     // );
     if (this.userInfo.userid === "admin") {

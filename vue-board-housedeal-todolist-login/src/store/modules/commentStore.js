@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   getCommentList,
   writeComment,
@@ -36,7 +34,7 @@ const commentStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
       // http
       //   .get(`/comment/${articleno}`)
@@ -74,7 +72,7 @@ const commentStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
       // http
       //   .get(`/comment/get/${commentno}`)

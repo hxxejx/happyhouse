@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   listArticle,
   // writeArticle,
@@ -43,7 +41,7 @@ const boardStore = {
         (error) => {
           console.log(error);
           // eslint-disable-next-line
-        }
+        },
       );
 
       // http
@@ -118,7 +116,7 @@ const boardStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
       // http
       //   .get(`/board/search/no/${word}`)
@@ -138,7 +136,7 @@ const boardStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
       // http
       //   .get(`/board/search/subject/${word}`)
