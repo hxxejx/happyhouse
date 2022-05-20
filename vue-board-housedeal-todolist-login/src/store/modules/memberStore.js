@@ -1,6 +1,11 @@
 import jwt_decode from "jwt-decode";
-import { login } from "@/api/member.js";
-import { findById } from "../../api/member";
+import {
+  login,
+  findById,
+  deleteMember,
+  updateMember,
+  joinMember,
+} from "@/api/member.js";
 
 const memberStore = {
   namespaced: true,
@@ -59,6 +64,34 @@ const memberStore = {
           console.log(error);
         },
       );
+    },
+    joinMember: (context, comment) => {
+      joinMember(comment, ({ data }) => {
+        let msg = "등록 처리시 문제가 발생했습니다.";
+        if (data === "success") {
+          msg = "등록이 완료되었습니다.";
+        }
+        alert(msg);
+      });
+    },
+    deleteMember: (context, commentno) => {
+      deleteMember(commentno, ({ data }) => {
+        let msg = "삭제 처리시 문제가 발생했습니다.";
+        if (data === "success") {
+          msg = "삭제가 완료되었습니다.";
+        }
+        console.log(msg);
+      });
+    },
+
+    updateMember: (context, comment) => {
+      updateMember(comment, ({ data }) => {
+        let msg = "수정 처리시 문제가 발생했습니다.";
+        if (data === "success") {
+          msg = "수정이 완료되었습니다.";
+        }
+        alert(msg);
+      });
     },
   },
 };

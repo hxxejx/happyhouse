@@ -20,7 +20,7 @@ async function deleteMember(userid, success, fail) {
   await api.delete(`/user/${userid}`).then(success).catch(fail);
 }
 
-async function modifyMember(user, success, fail) {
+async function updateMember(user, success, fail) {
   api
     .put(`/user/${user.userid}`, JSON.stringify(user))
     .then(success)
@@ -33,4 +33,4 @@ async function joinMember(user, success, fail) {
 
 // function logout(success, fail)
 
-export { login, getMember, findById, deleteMember, modifyMember, joinMember };
+export { login, getMember, findById, updateMember, deleteMember, joinMember };

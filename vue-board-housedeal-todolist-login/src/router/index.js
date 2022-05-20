@@ -53,10 +53,10 @@ const routes = [
         component: () => import("@/components/user/MemberMyPage.vue"),
       },
       {
-        path: "modify/:userid",
-        name: "memberModify",
+        path: "update/:userid",
+        name: "memberUpdate",
         beforeEnter: onlyAuthUser,
-        component: () => import("@/components/user/MemberModify.vue"),
+        component: () => import("@/components/user/MemberUpdate.vue"),
       },
     ],
   },

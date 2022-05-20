@@ -13,7 +13,7 @@
 import MemberInputItem from "@/components/user/item/MemberInputItem.vue";
 
 export default {
-  name: "MemberModify",
+  name: "MemberUpdate",
   components: {
     MemberInputItem,
   },

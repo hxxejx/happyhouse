@@ -70,7 +70,7 @@
 
 <script>
 /* eslint-disable */
-import { joinMember, findById, modifyMember } from "@/api/member";
+import { joinMember, findById, updateMember } from "@/api/member";
 import { mapState } from "vuex";
 
 const memberStore = "memberStore";
@@ -96,7 +96,7 @@ export default {
   created() {
     if (this.type === "modify") {
       findById(
-        this.$route.params.userid,
+        this.userInfo.userid,
         ({ data }) => {
           // this.article.articleno = data.article.articleno;
           // this.article.userid = data.article.userid;
@@ -110,11 +110,9 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
       this.isUserid = true;
-    } else {
-      this.user.userid = this.userInfo.userid;
     }
   },
   methods: {
@@ -144,7 +142,7 @@ export default {
         this.$refs.email.focus());
 
       if (!err) alert(msg);
-      else this.type === "join" ? this.joinMember() : this.modifyMember();
+      else this.type === "join" ? this.registMember() : this.modifyMember();
     },
     onReset(event) {
       event.preventDefault();
@@ -152,13 +150,19 @@ export default {
       this.user.userpwd = "";
       this.user.username = "";
       this.user.email = "";
-      this.$router.push({ name: "mypage" });
+      if (this.type === "modify") {
+        this.$router.push({ name: "mypage" });
+      } else {
+        this.$router.push({ name: "home" });
+      }
     },
-    joinMember() {
+    registMember() {
       joinMember(
         {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
+          username: this.user.username,
+          email: this.user.email,
         },
         ({ data }) => {
           let msg = "가입시 문제가 발생했습니다.";
@@ -170,14 +174,16 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     modifyMember() {
-      modifyMember(
+      updateMember(
         {
           userid: this.user.userid,
           userpwd: this.user.userpwd,
+          username: this.user.username,
+          email: this.user.email,
         },
         ({ data }) => {
           let msg = "수정 처리시 문제가 발생했습니다.";
@@ -189,7 +195,7 @@ export default {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     goHome() {
