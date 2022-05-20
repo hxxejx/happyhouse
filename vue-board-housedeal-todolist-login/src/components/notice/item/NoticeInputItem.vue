@@ -60,7 +60,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { writeArticle, getArticle, modifyArticle } from "@/api/notice";
 import { mapState } from "vuex";
 
@@ -85,20 +84,15 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
   created() {
-    // console.log("!!");
     if (this.type === "modify") {
       getArticle(
         this.$route.params.articleno,
         ({ data }) => {
-          // this.article.articleno = data.article.articleno;
-          // this.article.userid = data.article.userid;
-          // this.article.subject = data.article.subject;
-          // this.article.content = data.article.content;
           this.article = data;
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
       this.isUserid = true;
     } else {
@@ -154,7 +148,7 @@ export default {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
     },
     modifyArticle() {
@@ -171,12 +165,11 @@ export default {
             msg = "수정이 완료되었습니다.";
           }
           alert(msg);
-          // 현재 route를 /list로 변경.
           this.$router.push({ name: "noticeList" });
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
     },
     moveList() {

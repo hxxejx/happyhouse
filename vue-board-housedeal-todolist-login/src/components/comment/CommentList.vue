@@ -1,22 +1,20 @@
 <template>
   <b-row>
     <b-col v-if="comments.length">
-      <!-- <comment-modify v-if="isModify"></comment-modify> -->
       <comment-list-item
         v-for="comment in comments"
         :key="comment.commentno"
         v-bind="comment"
-        :articleno="articleno"
-        :check="check"
+        :pdata="pdata"
+        v-on:refresh-list="refreshList"
       />
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { /*mapState,*/ mapActions } from "vuex";
+import { mapActions } from "vuex";
 import CommentListItem from "@/components/comment/item/CommentListItem";
-// import CommentModify from "@/components/comment/CommentModify.vue";
 import { getCommentList } from "@/api/comment";
 
 const commentStore = "commentStore";
@@ -25,7 +23,6 @@ export default {
   name: "CommentList",
   components: {
     CommentListItem,
-    // CommentModify,
   },
   data() {
     return {
@@ -33,35 +30,34 @@ export default {
       comments: [],
     };
   },
-  computed: {
-    // ...mapState(commentStore, ["comments"]),
-  },
+  computed: {},
   props: {
-    articleno: String,
-    check: Number,
+    pdata: {
+      articleno: Number,
+      check: Number,
+    },
   },
   created() {
     getCommentList(
-      this.check,
-      this.articleno,
+      this.pdata.check,
+      this.pdata.articleno,
       ({ data }) => {
-        // commit("SET_COMMENT_LIST", data);
         this.comments = data;
       },
       (error) => {
         console.log(error);
       },
     );
-    // this.comments = [];
-    // console.log("cL" + this.articleno);
-    // let data = {
-    //   check: this.check,
-    //   articleno: this.articleno,
-    // };
-    // this.getCommentList(data);
   },
   methods: {
     ...mapActions(commentStore, ["getCommentList"]),
+    refreshList() {
+      let data = {
+        check: this.pdata.check,
+        articleno: this.pdata.articleno,
+      };
+      this.getCommentList(data);
+    },
   },
 };
 </script>

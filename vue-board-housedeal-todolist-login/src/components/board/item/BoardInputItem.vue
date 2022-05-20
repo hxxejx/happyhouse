@@ -88,10 +88,6 @@ export default {
       getArticle(
         this.$route.params.articleno,
         ({ data }) => {
-          // this.article.articleno = data.article.articleno;
-          // this.article.userid = data.article.userid;
-          // this.article.subject = data.article.subject;
-          // this.article.content = data.article.content;
           this.article = data;
         },
         (error) => {
@@ -169,7 +165,6 @@ export default {
             msg = "수정이 완료되었습니다.";
           }
           alert(msg);
-          // 현재 route를 /list로 변경.
           this.$router.push({ name: "boardList" });
         },
         (error) => {

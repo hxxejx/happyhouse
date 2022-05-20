@@ -37,15 +37,11 @@
         </b-card>
       </b-col>
     </b-row>
-    <comment-view
-      :articleno="this.$route.params.articleno"
-      check="notice"
-    ></comment-view>
+    <comment-view :pdata="pdata"></comment-view>
   </b-container>
 </template>
 
 <script>
-// import moment from "moment";
 import { getArticle, deleteArticle } from "@/api/notice";
 import CommentView from "@/views/CommentView.vue";
 import { mapState, mapActions } from "vuex";
@@ -63,6 +59,10 @@ export default {
         hit: 0,
         userid: "",
         regtime: "",
+      },
+      pdata: {
+        articleno: Number,
+        check: Number,
       },
       isAdmin: false,
     };
@@ -87,6 +87,8 @@ export default {
         console.log("삭제시 에러발생!!", error);
       },
     );
+    this.pdata.articleno = this.$route.params.articleno;
+    this.pdata.check = 2;
   },
   updated() {
     if (
@@ -95,7 +97,6 @@ export default {
     ) {
       this.isAdmin = true;
     }
-    // console.log(this.article);
   },
   methods: {
     ...mapActions(noticeStore, ["countUpArticle"]),
@@ -107,7 +108,6 @@ export default {
         name: "noticeModify",
         params: { articleno: this.article.articleno },
       });
-      //   this.$router.push({ path: `/notice/modify/${this.article.articleno}` });
     },
     deleteArticle() {
       if (confirm("정말로 삭제?")) {
@@ -120,11 +120,6 @@ export default {
   components: {
     CommentView,
   },
-  // filters: {
-  //   dateFormat(regtime) {
-  //     return moment(new Date(regtime)).format("YY.MM.DD hh:mm:ss");
-  //   },
-  // },
 };
 </script>
 

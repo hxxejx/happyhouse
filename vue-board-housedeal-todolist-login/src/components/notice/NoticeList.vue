@@ -25,7 +25,6 @@
             </b-tr>
           </b-thead>
           <tbody>
-            <!-- 하위 component인 ListRow에 데이터 전달(props) -->
             <notice-list-item
               v-for="article in articles"
               :key="article.articleno"
@@ -34,14 +33,12 @@
           </tbody>
         </b-table-simple>
       </b-col>
-      <!-- <b-col v-else class="text-center">도서 목록이 없습니다.</b-col> -->
     </b-row>
     <notice-search></notice-search>
   </b-container>
 </template>
 
 <script>
-// import { listArticle } from "@/api/board.js";
 import { mapState, mapActions } from "vuex";
 import NoticeListItem from "@/components/notice/item/NoticeListItem";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
@@ -56,28 +53,12 @@ export default {
   },
   data() {
     return {
-      // articles: [],
       isAdmin: false,
     };
   },
   created() {
     this.getArticleList();
-    // let param = {
-    //   pg: 1,
-    //   spp: 20,
-    //   key: null,
-    //   word: null,
-    // };
-    // listArticle(
-    //   param,
-    //   (response) => {
-    //     this.articles = response.data;
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //
-    //   }
-    // );
+
     if (this.userInfo.userid === "admin") {
       this.isAdmin = true;
     }

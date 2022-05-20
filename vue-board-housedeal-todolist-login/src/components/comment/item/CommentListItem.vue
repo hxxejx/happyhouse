@@ -2,17 +2,13 @@
   <div>
     <comment-modify
       v-if="isModify"
-      :commentno="this.nowcomment.commentno"
-      :userid="this.nowcomment.userid"
-      :comment="this.nowcomment.comment"
-      :articleno="this.nowcomment.articleno"
+      :comment="nowcomment"
       @cancle-modify="changeState"
       @changed="changeComment"
     ></comment-modify>
-    <b-card v-else>
+    <b-card v-if="isDelete">
       <b-card-text>작성자: {{ nowcomment.userid }} </b-card-text>
       <b-card-text>내용: {{ nowcomment.comment }}</b-card-text>
-      <!-- <b-card-text>{{ regtime | dateFormat }}</b-card-text> -->
       <b-card-text>일시: {{ nowcomment.regtime }}</b-card-text>
       <div v-if="this.isAdmin">
         <button @click="moveModify" class="btn card-link">수정</button>
@@ -38,8 +34,10 @@ export default {
     userid: String,
     comment: String,
     regtime: String,
-    articleno: Number,
-    check: Number,
+    pdata: {
+      articleno: Number,
+      check: Number,
+    },
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
@@ -58,6 +56,7 @@ export default {
       },
       isAdmin: false,
       isModify: false,
+      isDelete: true,
     };
   },
   created() {
@@ -65,7 +64,7 @@ export default {
     this.nowcomment.userid = this.userid;
     this.nowcomment.comment = this.comment;
     this.nowcomment.regtime = this.regtime;
-    this.nowcomment.articleno = this.articleno;
+    this.nowcomment.articleno = this.pdata.articleno;
     if (this.userInfo.userid === "admin") {
       this.isAdmin = true;
     }
@@ -74,37 +73,22 @@ export default {
     ...mapActions(commentStore, ["deleteComment", "getCommentList"]),
     moveModify() {
       this.isModify = true;
-      // this.$emit("modify-comment", {
-      //   commentno: this.commentno,
-      //   comment: this.comment,
-      //   articleno: this.articleno,
-      // });
-      // this.$router.push({
-      //   name: "commentModify",
-      //   params: { commentno: this.commentno, articleno: this.articleno },
-      // });
+      this.isDelete = false;
     },
     moveDelete() {
       if (confirm("삭제 하시겠습니까?")) {
         this.deleteComment(this.nowcomment.commentno);
-        alert("삭제가 완료되었습니다.");
-        let data = {
-          check: this.check,
-          articleno: this.articleno,
-        };
-        this.getCommentList(data);
-        // this.$router.replace({
-        //   name: "commentDelete",
-        //   params: { commentno: this.commentno, articleno: this.articleno },
-        // });
+        this.isDelete = false;
       }
     },
     changeState() {
       this.isModify = false;
+      this.isDelete = true;
     },
     changeComment(comment) {
       this.nowcomment.comment = comment.comment;
       this.isModify = false;
+      this.isDelete = true;
     },
   },
   filters: {

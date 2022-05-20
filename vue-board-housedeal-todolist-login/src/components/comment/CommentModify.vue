@@ -28,14 +28,12 @@
           >
         </b-form>
       </b-col>
-      <!-- <comment-list></comment-list> -->
     </b-row>
   </b-container>
 </template>
 
 <script>
-// import CommentInputItem from "@/components/comment/item/CommentInputItem.vue";
-import { mapActions /*mapState */ } from "vuex";
+import { mapActions } from "vuex";
 
 const commentStore = "commentStore";
 
@@ -50,33 +48,22 @@ export default {
       isUserid: false,
     };
   },
-  computed: {
-    // ...mapState(commentStore, [/*"article",*/ "comment"]),
-  },
+  computed: {},
   props: {
-    // type: { type: String },
-    commentno: Number,
-    articleno: Number,
-    userid: String,
-    comment: String,
+    comment: {
+      commentno: 0,
+      userid: "",
+      comment: "",
+      regtime: "",
+      articleno: 0,
+    },
   },
   created() {
-    this.nowcomment.userid = this.userid;
-    this.nowcomment.comment = this.comment;
-
-    // console.log(this.$route.params.commentno);
-    // console.log(this.comment);
-    // console.log(this.$route.params.articleno);
-    // this.getComment(this.$route.params.commentno);
-    // this.getComment(this.commentno);
+    this.nowcomment.userid = this.comment.userid;
+    this.nowcomment.comment = this.comment.comment;
   },
   methods: {
-    ...mapActions(commentStore, [
-      // "writeComment",
-      // "getCommentList",
-      // "getComment",
-      "modifyComment",
-    ]),
+    ...mapActions(commentStore, ["modifyComment"]),
     onSubmit(event) {
       event.preventDefault();
       let err = true;
@@ -94,24 +81,17 @@ export default {
       else this.modify();
     },
     modify() {
-      // console.log("!");
       let comment = {
-        commentno: this.commentno,
+        commentno: this.comment.commentno,
         userid: this.nowcomment.userid,
         comment: this.nowcomment.comment,
-        articleno: this.articleno,
+        articleno: this.comment.articleno,
       };
       this.modifyComment(comment);
-      // this.editArticle(this.article);
-      // this.$router.push({ name: "boardList" });
+
       this.refreshList();
     },
     refreshList() {
-      // this.$router.push({
-      //   name: "boardDetail",
-      //   params: { articleno: this.$route.params.articleno },
-      // });
-      // this.getCommentList(this.article.articleno);
       this.$emit("changed", {
         comment: this.nowcomment.comment,
       });
@@ -120,9 +100,7 @@ export default {
       this.$emit("cancle-modify");
     },
   },
-  components: {
-    // CommentInputItem,
-  },
+  components: {},
 };
 </script>
 

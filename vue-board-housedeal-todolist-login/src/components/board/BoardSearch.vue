@@ -4,10 +4,6 @@
       <b-input-group>
         <template #prepend>
           <b-form-select v-model="selected" :options="options"></b-form-select>
-          <!-- <b-dropdown text="검색조건" variant="outline-danger">
-          <b-dropdown-item >글번호</b-dropdown-item>
-          <b-dropdown-item>제목</b-dropdown-item>
-        </b-dropdown> -->
         </template>
         <b-form-input
           v-model.trim="word"
@@ -23,7 +19,6 @@
 
 <script>
 import { mapActions } from "vuex";
-// import { searchArticleByNo, searchArticleBySubject } from "@/api/board";
 
 const boardStore = "boardStore";
 
@@ -48,8 +43,6 @@ export default {
     beforeSearch() {
       if (this.word.length == 0) {
         alert("입력된 검색어가 없어서 전체 목록을 조회합니다.");
-        // this.getArticleList();
-        // this.$router.push({ name: "boardList" });
         this.getArticleList();
       } else if (this.selected == "articleno") {
         if (isNaN(this.word)) {
@@ -62,11 +55,9 @@ export default {
       }
     },
     searchByNo() {
-      // this.searchArticleByNo(this.word);
       this.searchArticleByNo(this.word);
     },
     searchBySubject() {
-      // this.searchArticleBySubject(this.word);
       this.searchArticleBySubject(this.word);
     },
   },

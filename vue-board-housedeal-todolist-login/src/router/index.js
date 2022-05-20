@@ -119,11 +119,6 @@ const routes = [
     component: () => import("@/components/comment/CommentModify.vue"),
   },
   {
-    path: "/comment/delete/:commentno",
-    name: "commentDelete",
-    component: () => import("@/components/comment/CommentDelete.vue"),
-  },
-  {
     path: "/notice",
     name: "notice",
     component: () => import("@/views/NoticeView.vue"),

@@ -25,7 +25,6 @@
             </b-tr>
           </b-thead>
           <tbody>
-            <!-- 하위 component인 ListRow에 데이터 전달(props) -->
             <board-list-item
               v-for="article in articles"
               :key="article.articleno"
@@ -34,14 +33,12 @@
           </tbody>
         </b-table-simple>
       </b-col>
-      <!-- <b-col v-else class="text-center">도서 목록이 없습니다.</b-col> -->
     </b-row>
     <board-search></board-search>
   </b-container>
 </template>
 
 <script>
-// import { listArticle } from "@/api/board.js";
 import { mapState, mapActions } from "vuex";
 import BoardListItem from "@/components/board/item/BoardListItem";
 import BoardSearch from "@/components/board/BoardSearch.vue";
@@ -55,28 +52,10 @@ export default {
     BoardSearch,
   },
   data() {
-    return {
-      // articles: [],
-    };
+    return {};
   },
   created() {
     this.getArticleList();
-    // let param = {
-    //   pg: 1,
-    //   spp: 20,
-    //   key: null,
-    //   word: null,
-    // };
-    // listArticle(
-    //   param,
-    //   (response) => {
-    //     this.articles = response.data;
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //
-    //   }
-    // );
   },
   computed: {
     ...mapState(boardStore, ["articles"]),

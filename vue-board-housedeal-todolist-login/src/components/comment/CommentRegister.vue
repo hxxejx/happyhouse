@@ -26,12 +26,10 @@
         <b-button type="submit" variant="primary" class="m-1">작성</b-button>
       </b-form>
     </b-col>
-    <!-- <comment-list></comment-list> -->
   </b-row>
 </template>
 
 <script>
-// import CommentList from "@/components/comment/CommentList.vue";
 import { mapActions, mapState } from "vuex";
 
 const memberStore = "memberStore";
@@ -54,21 +52,20 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
   props: {
-    // type: { type: String },
-    articleno: Number,
-    check: Number,
+    pdata: {
+      articleno: Number,
+      check: Number,
+    },
   },
   created() {
-    // console.log(this.userInfo);
-    // console.log(this.check);
     this.comment.userid = this.userInfo.userid;
     if (this.userInfo.userid === "admin") {
       this.isAdmin = true;
     }
   },
   methods: {
-    ...mapActions(commentStore, ["writeComment" /*"getCommentList"*/]),
-    // ...mapActions(memberStore, ["userConfirm"]),
+    ...mapActions(commentStore, ["writeComment"]),
+
     onSubmit(event) {
       event.preventDefault();
       let err = true;
@@ -89,25 +86,21 @@ export default {
       let comment = {
         userid: this.comment.userid,
         comment: this.comment.comment,
-        articleno: this.articleno,
-        check: this.check,
+        articleno: this.pdata.articleno,
+        check: this.pdata.check,
       };
-      // console.log(comment);
+
       this.writeComment(comment);
       this.refreshList();
     },
     refreshList() {
-      // console.log(this.article.articleno);
-      // this.getCommentList(this.article.articleno);
       this.$router.go({
         name: "commentList",
-        params: { articleno: this.articleno, check: this.check },
+        params: { articleno: this.pdata.articleno, check: this.pdata.check },
       });
     },
   },
-  components: {
-    // CommentList,
-  },
+  components: {},
 };
 </script>
 

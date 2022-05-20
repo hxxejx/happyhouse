@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+  <b-container>
+    <b-navbar toggleable="lg" type="white" variant="white">
       <b-navbar-brand href="#">
         <router-link to="/">
           <img
@@ -16,23 +16,23 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#"
+          <!-- <b-nav-item href="#"
             ><router-link :to="{ name: 'home' }" class="link"
               ><b-icon icon="house" font-scale="1.5"></b-icon> 홈</router-link
             ></b-nav-item
-          >
+          > -->
           <b-nav-item href="#"
             ><router-link :to="{ name: 'board' }" class="link"
               ><b-icon icon="journal" font-scale="1.5"></b-icon>
               Q&A</router-link
             ></b-nav-item
           >
-          <b-nav-item href="#"
+          <!-- <b-nav-item href="#"
             ><router-link :to="{ name: 'instagram' }" class="link"
               ><b-icon icon="instagram" font-scale="1.5"></b-icon>
               인별그램</router-link
             ></b-nav-item
-          >
+          > -->
           <b-nav-item href="#"
             ><router-link :to="{ name: 'notice' }" class="link"
               ><b-icon icon="file-text" font-scale="1.5"></b-icon>
@@ -94,7 +94,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-  </div>
+  </b-container>
 </template>
 
 <script>
