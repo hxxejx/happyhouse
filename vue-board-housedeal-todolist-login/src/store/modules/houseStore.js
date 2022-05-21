@@ -92,19 +92,33 @@ const houseStore = {
       // vue cli enviroment variables 검색
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+      // const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
       //   const SERVICE_KEY =
       //     "9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D";
+      // const params = {
+      //   LAWD_CD: gugunCode,
+      //   DEAL_YMD: "202112",
+      //   serviceKey: decodeURIComponent(SERVICE_KEY),
+      // };
       const params = {
-        LAWD_CD: dongCode,
-        DEAL_YMD: "202112",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
+        dong: dongCode,
       };
+      // houseList(
+      //   params,
+      //   (response) => {
+      //     //   console.log(response.data.response.body.items.item);
+      //     commit("SET_HOUSE_LIST", response.data.response.body.items.item);
+      //   },
+      //   (error) => {
+      //     console.log(error);
+      //   },
+      // );
       houseList(
         params,
-        (response) => {
-          //   console.log(response.data.response.body.items.item);
-          commit("SET_HOUSE_LIST", response.data.response.body.items.item);
+        ({ data }) => {
+          // console.log(commit, response);
+          console.log(data);
+          commit("SET_HOUSE_LIST", data);
         },
         (error) => {
           console.log(error);

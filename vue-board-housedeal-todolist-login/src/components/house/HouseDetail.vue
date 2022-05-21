@@ -2,7 +2,7 @@
   <b-container v-if="house" class="bv-example-row">
     <b-row>
       <b-col
-        ><h3>{{ house.아파트 }}</h3></b-col
+        ><h3>{{ house.aptName }}</h3></b-col
       >
     </b-row>
     <b-row class="mb-2 mt-1">
@@ -13,28 +13,29 @@
     <b-row>
       <b-col>
         <b-alert show variant="secondary"
-          >일련번호 : {{ house.일련번호 }}</b-alert
+          >일련번호 : {{ house.aptCode }}</b-alert
         >
       </b-col>
     </b-row>
     <b-row>
       <b-col>
         <b-alert show variant="primary"
-          >아파트 이름 : {{ house.아파트 }}
+          >아파트 이름 : {{ house.aptName }}
         </b-alert>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-alert show variant="info">법정동 : {{ house.법정동 }} </b-alert>
+        <b-alert show variant="info">법정동 : {{ house.dongName }} </b-alert>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-alert show variant="warning">층수 : {{ house.층 }}층</b-alert>
+        <!-- <b-alert show variant="warning">층수 : {{ house.층 }}층</b-alert> -->
+        <b-alert show variant="warning">지번 : {{ house.jibun }}</b-alert>
       </b-col>
     </b-row>
-    <b-row>
+    <!-- <b-row>
       <b-col>
         <b-alert show variant="danger"
           >거래금액 :
@@ -43,7 +44,7 @@
           }}원</b-alert
         >
       </b-col>
-    </b-row>
+    </b-row> -->
   </b-container>
 </template>
 
