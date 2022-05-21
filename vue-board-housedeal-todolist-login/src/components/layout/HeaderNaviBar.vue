@@ -41,7 +41,7 @@
           >
           <b-nav-item href="#"
             ><router-link :to="{ name: 'house' }" class="link"
-              ><b-icon icon="house-fill" font-scale="1.5"></b-icon>
+              ><b-icon icon="house" font-scale="1.5"></b-icon>
               아파트정보</router-link
             ></b-nav-item
           >
