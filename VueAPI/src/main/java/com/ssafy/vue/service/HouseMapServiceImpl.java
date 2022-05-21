@@ -34,5 +34,16 @@ public class HouseMapServiceImpl implements HouseMapService {
 	public List<HouseInfoDto> getAptInDong(String dong) throws Exception {
 		return houseMapMapper.getAptInDong(dong);
 	}
+	
+	@Override
+	public boolean countUpHouse(int aptcode) throws Exception {
+		return houseMapMapper.countUpHouse(aptcode) == 1;
+	}
+	
+	@Override
+	public List<HouseInfoDto> popularHouse() throws Exception {
+		return houseMapMapper.popularHouse();
+	}
+
 
 }

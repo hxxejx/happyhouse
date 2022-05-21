@@ -12,6 +12,7 @@ public class HouseInfoDto {
 	private String lat;
 	private String lng;
 	private String img;
+	private int hit;
 	private String recentPrice;
 
 	public int getAptCode() {
@@ -101,6 +102,15 @@ public class HouseInfoDto {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
 
 	public String getRecentPrice() {
 		return recentPrice;
@@ -114,7 +124,7 @@ public class HouseInfoDto {
 	public String toString() {
 		return "HouseInfoDto [aptCode=" + aptCode + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName="
 				+ dongName + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", buildYear=" + buildYear
-				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", recentPrice=" + recentPrice
+				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", hit=" + hit + ", recentPrice=" + recentPrice
 				+ "]";
 	}
 

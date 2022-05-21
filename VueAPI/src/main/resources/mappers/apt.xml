@@ -36,4 +36,17 @@
 		order by aptName
 	</select>
 	
+	<update id="countUpHouse" parameterType="int">
+		update houseinfo
+		set hit = hit + 1
+		where aptCode = #{aptcode}
+	</update>
+	
+	<select id="popularHouse" resultType="houseInfoDto">
+		select dongname, aptName, hit
+		from houseinfo
+		order by hit desc
+		limit 3
+	</select>
+	
 </mapper>
