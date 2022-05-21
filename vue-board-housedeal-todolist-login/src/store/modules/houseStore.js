@@ -1,10 +1,11 @@
-import { sidoList, gugunList, houseList } from "@/api/house.js";
+import { sidoList, gugunList, dongList, houseList } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
   state: {
     sidos: [{ value: null, text: "선택하세요" }],
     guguns: [{ value: null, text: "선택하세요" }],
+    dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
   },
@@ -22,11 +23,19 @@ const houseStore = {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    SET_DONG_LIST: (state, dongs) => {
+      dongs.forEach((dong) => {
+        state.dongs.push({ value: dong.dongCode, text: dong.dongName });
+      });
+    },
     CLEAR_SIDO_LIST: (state) => {
       state.sidos = [{ value: null, text: "선택하세요" }];
     },
     CLEAR_GUGUN_LIST: (state) => {
       state.guguns = [{ value: null, text: "선택하세요" }];
+    },
+    CLEAR_DONG_LIST: (state) => {
+      state.dongs = [{ value: null, text: "선택하세요" }];
     },
     SET_HOUSE_LIST: (state, houses) => {
       //   console.log(houses);
@@ -64,7 +73,22 @@ const houseStore = {
         },
       );
     },
-    getHouseList: ({ commit }, gugunCode) => {
+    getDong: ({ commit }, gugunCode) => {
+      const params = {
+        gugun: gugunCode,
+      };
+      dongList(
+        params,
+        ({ data }) => {
+          // console.log(commit, response);
+          commit("SET_DONG_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    getHouseList: ({ commit }, dongCode) => {
       // vue cli enviroment variables 검색
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
@@ -72,8 +96,8 @@ const houseStore = {
       //   const SERVICE_KEY =
       //     "9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D";
       const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202110",
+        LAWD_CD: dongCode,
+        DEAL_YMD: "202112",
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
       houseList(
