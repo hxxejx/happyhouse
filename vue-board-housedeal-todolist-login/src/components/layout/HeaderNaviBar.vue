@@ -22,23 +22,12 @@
             ></b-nav-item
           > -->
           <b-nav-item href="#"
-            ><router-link :to="{ name: 'board' }" class="link"
-              ><b-icon icon="journal" font-scale="1.5"></b-icon>
-              Q&A</router-link
-            ></b-nav-item
-          >
-          <!-- <b-nav-item href="#"
-            ><router-link :to="{ name: 'instagram' }" class="link"
-              ><b-icon icon="instagram" font-scale="1.5"></b-icon>
-              인별그램</router-link
-            ></b-nav-item
-          > -->
-          <b-nav-item href="#"
             ><router-link :to="{ name: 'notice' }" class="link"
               ><b-icon icon="file-text" font-scale="1.5"></b-icon>
               NOTICE</router-link
             ></b-nav-item
           >
+
           <b-nav-item href="#"
             ><router-link :to="{ name: 'house' }" class="link"
               ><b-icon icon="house" font-scale="1.5"></b-icon> APT
@@ -46,33 +35,43 @@
             ></b-nav-item
           >
           <b-nav-item href="#"
+            ><router-link :to="{ name: 'news' }" class="link"
+              ><b-icon icon="newspaper" font-scale="1.5"></b-icon>
+              NEWS</router-link
+            ></b-nav-item
+          >
+          <b-nav-item href="#"
+            ><router-link :to="{ name: 'board' }" class="link"
+              ><b-icon icon="question-circle" font-scale="1.5"></b-icon>
+              SUPPORT</router-link
+            ></b-nav-item
+          >
+          <b-nav-item href="#"
+            ><router-link :to="{ name: 'about' }" class="link"
+              ><b-icon icon="person" font-scale="1.5"></b-icon>
+              ABOUT</router-link
+            ></b-nav-item
+          >
+          <!-- <b-nav-item href="#"
             ><router-link :to="{ name: 'todo' }" class="link"
               ><b-icon icon="calendar-check" font-scale="1.5"></b-icon>
               TODO</router-link
             ></b-nav-item
-          >
+          > -->
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="userInfo">
-          <!-- <b-nav-item class="align-self-center"
-            ><b-avatar
-              variant="primary"
-              v-text="userInfo ? userInfo.userid.charAt(0).toUpperCase() : ''"
-            ></b-avatar
-            >{{ userInfo.username }}({{ userInfo.userid }})님
-            환영합니다.</b-nav-item
-          > -->
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
               <template #button-content>
-                <!-- <b-icon icon="people" font-scale="2"></b-icon> -->
                 <b-avatar
                   variant="primary"
                   v-text="
                     userInfo ? userInfo.userid.charAt(0).toUpperCase() : ''
                   "
-                ></b-avatar
-                >Welcome! {{ userInfo.username }}({{ userInfo.userid }})
+                  size="2em"
+                ></b-avatar>
+                Welcome! {{ userInfo.username }}({{ userInfo.userid }})
               </template>
               <b-dropdown-item href="#"
                 ><router-link :to="{ name: 'mypage' }" class="link"
@@ -105,16 +104,18 @@
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>MEMBER
+              <b-icon icon="people" font-scale="1.5"></b-icon> SIGN IN
             </template>
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'signUp' }" class="link"
-                ><b-icon icon="person-circle"></b-icon> SIGN UP</router-link
+                ><b-icon icon="person-circle" font-scale="1"></b-icon> SIGN
+                UP</router-link
               ></b-dropdown-item
             >
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'signIn' }" class="link"
-                ><b-icon icon="key"></b-icon> SIGN IN</router-link
+                ><b-icon icon="key" font-scale="1"></b-icon> SIGN
+                IN</router-link
               ></b-dropdown-item
             >
           </b-nav-item-dropdown>
