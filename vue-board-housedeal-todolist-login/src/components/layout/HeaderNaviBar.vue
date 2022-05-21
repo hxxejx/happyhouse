@@ -36,33 +36,59 @@
           <b-nav-item href="#"
             ><router-link :to="{ name: 'notice' }" class="link"
               ><b-icon icon="file-text" font-scale="1.5"></b-icon>
-              공지사항</router-link
+              NOTICE</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"
             ><router-link :to="{ name: 'house' }" class="link"
-              ><b-icon icon="house" font-scale="1.5"></b-icon>
-              아파트정보</router-link
+              ><b-icon icon="house" font-scale="1.5"></b-icon> APT
+              INFO</router-link
             ></b-nav-item
           >
           <b-nav-item href="#"
             ><router-link :to="{ name: 'todo' }" class="link"
               ><b-icon icon="calendar-check" font-scale="1.5"></b-icon>
-              TodoList</router-link
+              TODO</router-link
             ></b-nav-item
           >
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="userInfo">
-          <b-nav-item class="align-self-center"
+          <!-- <b-nav-item class="align-self-center"
             ><b-avatar
               variant="primary"
               v-text="userInfo ? userInfo.userid.charAt(0).toUpperCase() : ''"
             ></b-avatar
             >{{ userInfo.username }}({{ userInfo.userid }})님
             환영합니다.</b-nav-item
-          >
-          <b-nav-item class="align-self-center"
+          > -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+              <template #button-content>
+                <!-- <b-icon icon="people" font-scale="2"></b-icon> -->
+                <b-avatar
+                  variant="primary"
+                  v-text="
+                    userInfo ? userInfo.userid.charAt(0).toUpperCase() : ''
+                  "
+                ></b-avatar
+                >Welcome! {{ userInfo.username }}({{ userInfo.userid }})
+              </template>
+              <b-dropdown-item href="#"
+                ><router-link :to="{ name: 'mypage' }" class="link"
+                  ><b-icon icon="person-circle"></b-icon> MY INFO</router-link
+                ></b-dropdown-item
+              >
+              <b-dropdown-item
+                href="#"
+                class="link"
+                @click.prevent="onClickLogout"
+                ><a href=""> <b-icon icon="door-open"></b-icon> SIGN OUT </a>
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+
+          <!-- <b-nav-item class="align-self-center"
             ><router-link
               :to="{ name: 'mypage' }"
               class="link align-self-center"
@@ -73,21 +99,22 @@
             class="link align-self-center"
             @click.prevent="onClickLogout"
             >로그아웃</b-nav-item
-          >
+          > -->
         </b-navbar-nav>
+
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>
+              <b-icon icon="people" font-scale="2"></b-icon>MEMBER
             </template>
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'signUp' }" class="link"
-                ><b-icon icon="person-circle"></b-icon> 회원가입</router-link
+                ><b-icon icon="person-circle"></b-icon> SIGN UP</router-link
               ></b-dropdown-item
             >
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'signIn' }" class="link"
-                ><b-icon icon="key"></b-icon> 로그인</router-link
+                ><b-icon icon="key"></b-icon> SIGN IN</router-link
               ></b-dropdown-item
             >
           </b-nav-item-dropdown>
@@ -121,4 +148,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+a {
+  text-decoration: none;
+}
+</style>
