@@ -1,4 +1,10 @@
-import { sidoList, gugunList, dongList, houseList } from "@/api/house.js";
+import {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  countUpHouse,
+} from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -128,6 +134,15 @@ const houseStore = {
     detailHouse: ({ commit }, house) => {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", house);
+    },
+    countUpHouse: (context, aptcode) => {
+      countUpHouse(aptcode, ({ data }) => {
+        let msg = "조회수 처리시 문제가 발생했습니다.";
+        if (data === "success") {
+          msg = "조회수 증가가 완료되었습니다.";
+        }
+        console.log(msg);
+      });
     },
   },
 };

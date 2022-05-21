@@ -13,8 +13,8 @@
         alt="Image 1"
       ></b-img>
     </b-col>
-    <b-col cols="10" class="align-self-center">
-      [{{ house.aptCode }}] {{ house.aptName }}
+    <b-col cols="10" class="align-self-center" @click="countUp">
+      {{ house.aptName }}
     </b-col>
   </b-row>
 </template>
@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     ...mapActions(houseStore, ["detailHouse"]),
+    ...mapActions(houseStore, ["countUpHouse"]),
     selectHouse() {
       // console.log("listRow : ", this.house);
       // this.$store.dispatch("getHouse", this.house);
@@ -43,6 +44,9 @@ export default {
     },
     colorChange(flag) {
       this.isColor = flag;
+    },
+    countUp() {
+      this.countUpHouse(this.house.aptCode);
     },
   },
 };
