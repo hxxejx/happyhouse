@@ -71,8 +71,10 @@
 	<!-- 게시글 삭제 -->
 	<delete id="deleteNotice" parameterType="int">
 		delete
-		from notice
-		where articleno = #{articleno}
+		from notice, comments
+        using notice inner join comments
+		where notice.articleno = #{articleno}
+		and comments.check = "2"
 	</delete>
 
 	<!-- 글번호로 게시글 검색 -->
