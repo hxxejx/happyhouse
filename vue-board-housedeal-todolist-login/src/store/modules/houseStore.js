@@ -98,7 +98,7 @@ const houseStore = {
       // const params = {
       //   LAWD_CD: gugunCode,
       //   DEAL_YMD: "202112",
-      //   serviceKey: decodeURIComponent(SERVICE_KEY),
+      // serviceKey: decodeURIComponent(SERVICE_KEY),
       // };
       const params = {
         dong: dongCode,
@@ -117,7 +117,7 @@ const houseStore = {
         params,
         ({ data }) => {
           // console.log(commit, response);
-          console.log(data);
+          // console.log(data);
           commit("SET_HOUSE_LIST", data);
         },
         (error) => {
