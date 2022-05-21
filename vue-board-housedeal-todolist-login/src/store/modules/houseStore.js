@@ -4,6 +4,7 @@ import {
   dongList,
   houseList,
   countUpHouse,
+  popularHouse,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -49,6 +50,9 @@ const houseStore = {
     },
     SET_DETAIL_HOUSE: (state, house) => {
       state.house = house;
+    },
+    SET_POPULAR_HOUSE: (state, houses) => {
+      state.houses = houses;
     },
   },
 
@@ -143,6 +147,18 @@ const houseStore = {
         }
         console.log(msg);
       });
+    },
+    getPopularHouse: ({ commit }) => {
+      const params = {};
+      popularHouse(
+        params,
+        ({ data }) => {
+          commit("SET_POPULAR_HOUSE", data);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
     },
   },
 };

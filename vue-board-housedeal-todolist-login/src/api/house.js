@@ -24,4 +24,8 @@ function countUpHouse(aptcode, success, fail) {
   api.get(`/map/hit/${aptcode}`).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList, countUpHouse };
+function popularHouse(success, fail) {
+  api.get(`/map/popular`).then(success).catch(fail);
+}
+
+export { sidoList, gugunList, dongList, houseList, countUpHouse, popularHouse };

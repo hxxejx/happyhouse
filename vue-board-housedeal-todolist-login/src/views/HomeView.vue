@@ -30,21 +30,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
-        <b-jumbotron
-          bg-variant="muted"
-          text-variant="dark"
-          border-variant="dark"
-        >
-          <template #header><b>영역2</b></template>
-
-          <template #lead> 지도미리보기<br /> </template>
-
-          <hr class="my-4" />
-
-          <p></p>
-        </b-jumbotron>
-      </b-col>
+      <b-col> </b-col>
     </b-row>
     <b-row>
       <b-col>
@@ -64,7 +50,7 @@
         </b-jumbotron> -->
       </b-col>
       <b-col>
-        <board-list></board-list>
+        <house-list></house-list>
         <!-- <b-jumbotron
           bg-variant="muted"
           text-variant="dark"
@@ -84,8 +70,8 @@
 </template>
 
 <script>
-import NoticeList from "@/components/notice/NoticeList.vue";
-import BoardList from "@/components/board/BoardList.vue";
+import NoticeList from "@/components/home/NoticeList.vue";
+import HouseList from "@/components/home/HouseList.vue";
 
 export default {
   name: "HomeView",
@@ -94,7 +80,7 @@ export default {
   },
   components: {
     NoticeList,
-    BoardList,
+    HouseList,
   },
 };
 </script>
