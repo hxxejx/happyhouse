@@ -92,11 +92,6 @@ const routes = [
     ],
   },
   {
-    path: "/instagram",
-    name: "instagram",
-    component: () => import("@/views/InstagramView.vue"),
-  },
-  {
     path: "/house",
     name: "house",
     beforeEnter: onlyAuthUser,
