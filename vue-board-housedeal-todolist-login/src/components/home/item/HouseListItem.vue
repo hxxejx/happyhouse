@@ -4,7 +4,7 @@
       ><i
         ><b><font color="red">HiT!</font></b></i
       >
-      <b> {{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
+      <b> {{ dongname }} {{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
     >
   </b-tr>
 </template>
