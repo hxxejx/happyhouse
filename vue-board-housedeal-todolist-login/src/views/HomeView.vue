@@ -12,7 +12,7 @@
         >
           <router-link :to="{ name: 'signUp' }">
             <b-carousel-slide
-              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcHgGR3%2FbtrCVSjnwvh%2FglGXankMQgiPdUhKL8GEf0%2Fimg.png"
+              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSKUAj%2FbtrCUmrNe99%2FMV7e1BkZhS11tKZJCmM6k1%2Fimg.png"
             ></b-carousel-slide>
           </router-link>
           <a href="https://housing.seoul.go.kr/site/main/content/sh01_040081">
