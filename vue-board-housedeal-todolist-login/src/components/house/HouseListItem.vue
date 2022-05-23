@@ -7,7 +7,7 @@
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
   >
-    <b-col cols="2" class="text-center align-self-center">
+    <!-- <b-col cols="2" class="text-center align-self-center">
       <b-img
         thumbnail
         src="https://picsum.photos/250/250/?image=58"
@@ -16,47 +16,47 @@
     </b-col>
     <b-col cols="10" class="align-self-center" @click="countUp">
       {{ house.aptName }}
-    </b-col>
+    </b-col> -->
   </b-row>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 
-const houseStore = "houseStore";
+// const houseStore = "houseStore";
 
-export default {
-  name: "HouseListItem",
-  data() {
-    return {
-      isColor: false,
-    };
-  },
-  props: {
-    house: Object,
-  },
-  methods: {
-    ...mapActions(houseStore, ["detailHouse", "getDealList"]),
-    ...mapActions(houseStore, ["countUpHouse"]),
-    selectHouse() {
-      this.detailHouse(this.house);
-      this.getDealList(this.house.aptCode);
-    },
-    colorChange(flag) {
-      this.isColor = flag;
-    },
-    countUp() {
-      this.countUpHouse(this.house.aptCode);
-    },
-  },
-};
+// export default {
+//   name: "HouseListItem",
+//   data() {
+//     return {
+//       isColor: false,
+//     };
+//   },
+//   props: {
+//     house: Object,
+//   },
+//   methods: {
+//     ...mapActions(houseStore, ["detailHouse", "getDealList"]),
+//     ...mapActions(houseStore, ["countUpHouse"]),
+//     selectHouse() {
+//       this.detailHouse(this.house);
+//       this.getDealList(this.house.aptCode);
+//     },
+//     colorChange(flag) {
+//       this.isColor = flag;
+//     },
+//     countUp() {
+//       this.countUpHouse(this.house.aptCode);
+//     },
+//   },
+// };
 </script>
 
 <style scoped>
-.apt {
+/* .apt {
   width: 50px;
 }
 .mouse-over-bgcolor {
   background-color: lightblue;
-}
+} */
 </style>

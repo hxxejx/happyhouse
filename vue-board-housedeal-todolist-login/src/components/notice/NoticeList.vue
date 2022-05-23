@@ -14,7 +14,29 @@
     </b-row>
     <b-row>
       <b-col v-if="articles.length">
-        <b-table-simple hover responsive>
+        <b-table
+          hover
+          responsive
+          id="list-item"
+          :items="articles"
+          :fields="fields"
+          :per-page="perPage"
+          :current-page="currentPage"
+        >
+          <template #cell(subject)="data">
+            <router-link
+              :to="{
+                name: 'noticeDetail',
+                params: { articleno: data.item.articleno },
+              }"
+              >{{ data.item.subject }}</router-link
+            >
+          </template>
+          <template #cell(regtime)="data">
+            {{ data.item.regtime | dateFormat }}
+          </template>
+        </b-table>
+        <!-- <b-table-simple hover responsive>
           <b-thead head-variant="dark">
             <b-tr>
               <b-th>글번호</b-th>
@@ -31,29 +53,64 @@
               v-bind="article"
             />
           </tbody>
-        </b-table-simple>
+        </b-table-simple> -->
       </b-col>
     </b-row>
     <notice-search></notice-search>
+    <div class="overflow-auto">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="list-item"
+        align="center"
+      ></b-pagination>
+    </div>
   </b-container>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import NoticeListItem from "@/components/notice/item/NoticeListItem";
+// import NoticeListItem from "@/components/notice/item/NoticeListItem";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
+import moment from "moment";
 
 const noticeStore = "noticeStore";
 const memberStore = "memberStore";
+
 export default {
   name: "NoticeList",
   components: {
-    NoticeListItem,
+    // NoticeListItem,
     NoticeSearch,
   },
   data() {
     return {
       isAdmin: false,
+      perPage: 10,
+      currentPage: 1,
+      fields: [
+        {
+          key: "articleno",
+          label: "글번호",
+        },
+        {
+          key: "subject",
+          label: "제목",
+        },
+        {
+          key: "hit",
+          label: "조회수",
+        },
+        {
+          key: "userid",
+          label: "작성자",
+        },
+        {
+          key: "regtime",
+          label: "작성일",
+        },
+      ],
     };
   },
   created() {
@@ -66,11 +123,19 @@ export default {
   computed: {
     ...mapState(noticeStore, ["articles"]),
     ...mapState(memberStore, ["userInfo"]),
+    rows() {
+      return this.articles.length;
+    },
   },
   methods: {
     ...mapActions(noticeStore, ["getArticleList"]),
     moveWrite() {
       this.$router.push({ name: "noticeRegister" });
+    },
+  },
+  filters: {
+    dateFormat(regtime) {
+      return moment(new Date(regtime)).format("YY.MM.DD");
     },
   },
 };
