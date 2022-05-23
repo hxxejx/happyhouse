@@ -82,6 +82,7 @@
 		select articleno, userid, subject, content, hit, regtime
 		from notice
 		where articleno = #{articleno}
+		order by articleno desc
 	</select>
 
 	<!-- 제목으로 게시글 검색 -->
@@ -89,6 +90,7 @@
 		select articleno, userid, subject, content, hit, regtime
 		from notice
 		where subject like concat('%', #{subject}, '%')
+		order by articleno desc
 	</select>
 
 	<select id="fileInfoList" resultType="FileInfoDto">
