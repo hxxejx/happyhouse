@@ -2,9 +2,9 @@
   <b-tr>
     <b-td
       ><i
-        ><b><font color="red">HiT!</font></b></i
+        ><b class="blink"><font color="orangered">HiT!</font></b></i
       >
-      <b> {{ dongname }} {{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
+      {{ dongName }} <b>{{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
     >
   </b-tr>
 </template>
@@ -13,7 +13,7 @@
 export default {
   name: "HouseListItem",
   props: {
-    dongname: String,
+    dongName: String,
     aptName: String,
     hit: Number,
   },
@@ -23,5 +23,14 @@ export default {
 <style scoped>
 .apt {
   width: 50px;
+}
+
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+.blink {
+  animation: blink-effect 1s step-end infinite;
 }
 </style>
