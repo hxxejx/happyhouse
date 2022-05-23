@@ -34,7 +34,6 @@ export default {
   },
   created() {
     this.getPopularHouse();
-    console.log("인기매물 출력");
   },
   computed: {
     ...mapState(houseStore, ["houses"]),

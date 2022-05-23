@@ -164,7 +164,6 @@ const houseStore = {
     getPopularHouse: ({ commit }) => {
       popularHouse(
         ({ data }) => {
-          console.log(data);
           commit("SET_POPULAR_HOUSE", data);
         },
         (error) => {
