@@ -102,23 +102,11 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-else>
-          <b-nav-item-dropdown right>
-            <template #button-content>
-              <b-icon icon="people" font-scale="1.5"></b-icon> SIGN IN
-            </template>
-            <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'signUp' }" class="link"
-                ><b-icon icon="person-circle" font-scale="1"></b-icon> SIGN
-                UP</router-link
-              ></b-dropdown-item
+          <b-nav-item right>
+            <router-link :to="{ name: 'signIn' }" class="link"
+              ><b-icon icon="key" font-scale="1"></b-icon> LOGIN</router-link
             >
-            <b-dropdown-item href="#"
-              ><router-link :to="{ name: 'signIn' }" class="link"
-                ><b-icon icon="key" font-scale="1"></b-icon> SIGN
-                IN</router-link
-              ></b-dropdown-item
-            >
-          </b-nav-item-dropdown>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

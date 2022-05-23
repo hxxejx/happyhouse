@@ -39,6 +39,7 @@
               @click="confirm"
               >로그인</b-button
             >
+            아이디가 없으신가요?
             <b-button
               type="button"
               variant="success"
