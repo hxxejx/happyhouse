@@ -162,10 +162,9 @@ const houseStore = {
       });
     },
     getPopularHouse: ({ commit }) => {
-      const params = {};
       popularHouse(
-        params,
         ({ data }) => {
+          console.log(data);
           commit("SET_POPULAR_HOUSE", data);
         },
         (error) => {
