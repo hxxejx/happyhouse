@@ -100,8 +100,15 @@ const routes = [
   {
     path: "/news",
     name: "news",
-    beforeEnter: onlyAuthUser,
     component: () => import("@/views/NewsView.vue"),
+    redirect: "/news/list",
+    children: [
+      {
+        path: "list",
+        name: "newsList",
+        component: () => import("@/components/news/NewsList.vue"),
+      },
+    ],
   },
   {
     path: "/about",

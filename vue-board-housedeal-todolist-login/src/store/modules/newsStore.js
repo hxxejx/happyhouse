@@ -1,4 +1,4 @@
-import { listArticle } from "@/api/board.js";
+import { listArticle } from "@/api/news.js";
 
 const newsStore = {
   namespaced: true,
@@ -22,6 +22,7 @@ const newsStore = {
       listArticle(
         param,
         ({ data }) => {
+          console.log("뉴스");
           commit("SET_ARTICLE_LIST", data);
         },
         (error) => {
@@ -32,4 +33,4 @@ const newsStore = {
   },
 };
 
-export default boardStore;
+export default newsStore;
