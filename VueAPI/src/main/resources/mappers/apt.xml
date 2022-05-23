@@ -56,5 +56,13 @@
 		where aptCode = #{aptCode}
 		order by no
 	</select>
+	
+	<select id="getNewDeal" resultType="HouseInfoDto">
+		select houseinfo.aptName, housedeal.dealAmount
+		from houseinfo, housedeal
+		where houseinfo.aptCode = housedeal.aptCode
+		order by dealYear desc, dealMonth desc, dealDay desc
+		limit 3
+	</select>
 
 </mapper>

@@ -14,6 +14,7 @@ public class HouseInfoDto {
 	private String img;
 	private int hit;
 	private String recentPrice;
+	private String dealAmount;
 
 	public int getAptCode() {
 		return aptCode;
@@ -119,13 +120,21 @@ public class HouseInfoDto {
 	public void setRecentPrice(String recentPrice) {
 		this.recentPrice = recentPrice;
 	}
+	
+	public String getDealAmount() {
+		return dealAmount;
+	}
+	
+	public void setDealAmount(String dealAmount) {
+		this.dealAmount = dealAmount;
+	}
 
 	@Override
 	public String toString() {
 		return "HouseInfoDto [aptCode=" + aptCode + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName="
 				+ dongName + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", buildYear=" + buildYear
 				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", hit=" + hit + ", recentPrice=" + recentPrice
-				+ "]";
+				+ ", dealAmount=" + dealAmount + "]";
 	}
 
 }

@@ -16,5 +16,5 @@ public interface HouseMapMapper {
 	int countUpHouse(int aptcode) throws SQLException;
 	List<HouseInfoDto> popularHouse() throws SQLException;
 	List<HouseDealDto> getAptDeal(int aptCode);
-	
+	List<HouseInfoDto> getNewDeal() throws SQLException;
 }

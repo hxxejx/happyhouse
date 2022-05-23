@@ -71,4 +71,10 @@ public class HouseMapController {
 		return new ResponseEntity<List<HouseDealDto>>(houseMapService.getAptDeal(aptCode), HttpStatus.OK);
 	}
 	
+	@GetMapping("/new")
+	public ResponseEntity<List<HouseInfoDto>> newDeal() throws Exception {
+		logger.debug("getNewDeal : {}", houseMapService.getNewDeal());
+		return new ResponseEntity<List<HouseInfoDto>>(houseMapService.getNewDeal(), HttpStatus.OK);
+	}
+	
 }

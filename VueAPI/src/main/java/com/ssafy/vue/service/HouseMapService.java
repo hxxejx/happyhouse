@@ -15,5 +15,6 @@ public interface HouseMapService {
 	boolean countUpHouse(int aptcode) throws Exception;
 	List<HouseInfoDto> popularHouse() throws Exception;
 	List<HouseDealDto> getAptDeal(int aptCode);
+	List<HouseInfoDto> getNewDeal() throws Exception;
 	
 }
