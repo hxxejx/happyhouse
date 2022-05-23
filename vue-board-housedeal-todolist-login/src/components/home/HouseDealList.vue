@@ -2,15 +2,15 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-table-simple>
+        <b-table-simple caption-top>
           <b-thead head-variant="white">
             <b-tr>
-              <b-th>인기 매물 BEST</b-th>
+              <b-th>NEW 거래 매물</b-th>
             </b-tr>
           </b-thead>
           <tbody>
-            <house-list-item
-              v-for="house in houses1"
+            <house-deal-list-item
+              v-for="house in houses2"
               :key="house.aptCode"
               v-bind="house"
             />
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import HouseListItem from "@/components/home/item/HouseListItem.vue";
+import HouseDealListItem from "@/components/home/item/HouseDealListItem.vue";
 import { mapState, mapActions } from "vuex";
 
 const houseStore = "houseStore";
@@ -30,16 +30,16 @@ const houseStore = "houseStore";
 export default {
   name: "HouseList",
   components: {
-    HouseListItem,
+    HouseDealListItem,
   },
   created() {
-    this.getPopularHouse();
+    this.getNewDeal();
   },
   computed: {
-    ...mapState(houseStore, ["houses1"]),
+    ...mapState(houseStore, ["houses2"]),
   },
   methods: {
-    ...mapActions(houseStore, ["getPopularHouse"]),
+    ...mapActions(houseStore, ["getNewDeal"]),
   },
 };
 </script>

@@ -6,6 +6,7 @@ import {
   countUpHouse,
   popularHouse,
   dealList,
+  newDeal,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -55,7 +56,7 @@ const houseStore = {
       state.house = house;
     },
     SET_POPULAR_HOUSE: (state, houses) => {
-      state.houses = houses;
+      state.houses1 = houses;
     },
     CLEAR_HOUSE_LIST: (state) => {
       state.houses = [];
@@ -74,6 +75,9 @@ const houseStore = {
     },
     CLEAR_DEAL_LIST: (state) => {
       state.deals = [];
+    },
+    SET_NEW_DEAL: (state, houses) => {
+      state.houses2 = houses;
     },
   },
 
@@ -189,6 +193,16 @@ const houseStore = {
           // console.log(commit, response);
           // console.log(data);
           commit("SET_DEAL_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    getNewDeal: ({ commit }) => {
+      newDeal(
+        ({ data }) => {
+          commit("SET_NEW_DEAL", data);
         },
         (error) => {
           console.log(error);
