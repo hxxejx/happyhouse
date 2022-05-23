@@ -3,15 +3,8 @@
     <b-row>
       <b-col v-if="articles.length">
         <b-table-simple hover responsive>
-          <b-thead head-variant="white">
-            <b-tr>
-              <b-th>글번호</b-th>
-              <b-th>공지사항</b-th>
-              <b-th>작성일</b-th>
-            </b-tr>
-          </b-thead>
           <tbody>
-            <notice-list-item
+            <news-list-item
               v-for="article in articles"
               :key="article.articleno"
               v-bind="article"
@@ -25,22 +18,22 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import NoticeListItem from "@/components/home/item/NoticeListItem";
+import NoticeListItem from "@/components/home/item/NewsListItem";
 
-const noticeStore = "noticeStore";
+const newsStore = "newsStore";
 export default {
-  name: "NoticeList",
+  name: "NewsList",
   components: {
-    NoticeListItem,
+    NewsListItem,
   },
   created() {
     this.getArticleList();
   },
   computed: {
-    ...mapState(noticeStore, ["articles"]),
+    ...mapState(newsStore, ["articles"]),
   },
   methods: {
-    ...mapActions(noticeStore, ["getArticleList"]),
+    ...mapActions(newsStore, ["getArticleList"]),
   },
 };
 </script>
