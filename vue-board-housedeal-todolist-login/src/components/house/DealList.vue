@@ -13,7 +13,7 @@
         <b-modal
           id="modal-center"
           hide-footer
-          size="md"
+          size="lg"
           centered
           title="거래내역"
         >

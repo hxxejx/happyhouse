@@ -1,39 +1,62 @@
 <template>
   <div>
-    <b-row>
-      <b-col>
-        <b-button variant="outline-dark" @click="searchPlaces('공원')"
+    <b-row class="mb-3" v-show="!addressIn">
+      <b-col v-for="(btn, index) in buttons" :key="index">
+        <b-button
+          :pressed.sync="btn.state"
+          variant="outline-dark"
+          @click="searchPlaces(btn.caption)"
+          v-bind:disabled="addressIn"
+          ><b-icon :icon="btn.icon" /> {{ btn.caption }}</b-button
+        >
+      </b-col>
+      <!-- <b-col>
+        <b-button
+          variant="outline-dark"
+          @click="searchPlaces('공원')"
+          v-bind:disabled="addressIn"
           ><b-icon icon="bicycle" /> 공원</b-button
         ></b-col
       >
       <b-col>
-        <b-button variant="outline-dark" @click="searchPlaces('어린이집')"
+        <b-button
+          variant="outline-dark"
+          @click="searchPlaces('어린이집')"
+          v-bind:disabled="addressIn"
           ><b-icon icon="people-fill" /> 어린이집</b-button
         >
       </b-col>
       <b-col
-        ><b-button variant="outline-dark" @click="searchPlaces('반찬가게')"
-          ><b-icon icon="shop" /> 반찬 가게</b-button
+        ><b-button
+          variant="outline-dark"
+          @click="searchPlaces('반찬가게')"
+          v-bind:disabled="addressIn"
+          ><b-icon icon="shop" /> 반찬가게</b-button
         ></b-col
       >
       <b-col>
-        <b-button variant="outline-dark" @click="searchPlaces('장난감도서관')"
+        <b-button
+          variant="outline-dark"
+          @click="searchPlaces('장난감도서관')"
+          v-bind:disabled="addressIn"
           ><b-icon icon="joystick" /> 장난감도서관</b-button
         >
       </b-col>
       <b-col>
-        <b-button variant="outline-dark" @click="searchPlaces('병원')"
+        <b-button
+          variant="outline-dark"
+          @click="searchPlaces('병원')"
+          v-bind:disabled="addressIn"
           ><b-icon icon="building" /> 병원</b-button
         >
-      </b-col>
+      </b-col> -->
     </b-row>
     <div class="map_wrap">
       <div
         id="map"
         style="width: 100%; height: 100%; position: relative; overflow: hidden"
       ></div>
-
-      <div id="menu_wrap" class="bg_white">
+      <div id="menu_wrap" class="bg_white" v-show="searchCheck">
         <ul id="placesList"></ul>
         <div id="pagination"></div>
       </div>
@@ -60,6 +83,15 @@ export default {
       search_markers: [],
       // keyword: "",
       // overlay: null,
+      addressIn: true,
+      searchCheck: false,
+      buttons: [
+        { caption: "공원", state: false, icon: "bicycle" },
+        { caption: "어린이집", state: false, icon: "people" },
+        { caption: "반찬가게", state: false, icon: "shop" },
+        { caption: "장난감도서관", state: false, icon: "joystick" },
+        { caption: "병원", state: false, icon: "building" },
+      ],
     };
   },
   // -----------------------------------------------추가 시작----------------------------------------------- // -----------------------------------------------추가 끝-----------------------------------------------
@@ -67,7 +99,8 @@ export default {
     initMap() {
       const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       const options = {
-        center: new kakao.maps.LatLng(35.20527, 126.81138), //지도의 중심좌표.
+        center: new kakao.maps.LatLng(37.56667, 126.978513), //지도의 중심좌표(서울시청)
+        // center: new kakao.maps.LatLng(35.20527, 126.81138), //지도의 중심좌표(광주싸피)
         level: 3, //지도의 레벨(확대, 축소 정도)
       };
       this.map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -254,6 +287,7 @@ export default {
     searchPlaces(data) {
       if (this.address + " " + data == keyword) {
         this.removeAll();
+        this.searchCheck = false;
       }
       // var keyword = document.getElementById("keyword").value;
       else {
@@ -262,8 +296,14 @@ export default {
           alert("키워드를 입력해주세요!");
           return false;
         }
+        this.searchCheck = true;
         // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
         this.ps.keywordSearch(keyword, this.placesSearchCB);
+      }
+      for (let btn of this.buttons) {
+        if (btn.caption !== data) {
+          btn.state = false;
+        }
       }
     },
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -445,6 +485,9 @@ export default {
       this.setPositions();
       this.removeAll();
     },
+    address: function () {
+      this.addressIn = false;
+    },
   },
   mounted() {
     if (!window.kakao || !window.kakao.maps) {
@@ -580,6 +623,8 @@ export default {
   position: relative;
   width: 100%;
   height: 500px;
+  border: 1px solid gray;
+  border-radius: 3px;
 }
 #menu_wrap {
   position: absolute;
@@ -590,7 +635,7 @@ export default {
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
