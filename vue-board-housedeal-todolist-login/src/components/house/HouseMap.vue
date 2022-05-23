@@ -1,36 +1,31 @@
 <template>
   <div>
     <b-row>
-      <b-col
-        ><b-button variant="outline-dark" @click="searchPlaces('공원')"
-          >공원</b-button
+      <b-col>
+        <b-button variant="outline-dark" @click="searchPlaces('공원')"
+          ><b-icon icon="bicycle" /> 공원</b-button
         ></b-col
       >
-      <b-col
-        ><b-button variant="outline-dark" @click="searchPlaces('어린이집')"
-          >어린이집</b-button
-        ></b-col
-      >
+      <b-col>
+        <b-button variant="outline-dark" @click="searchPlaces('어린이집')"
+          ><b-icon icon="people-fill" /> 어린이집</b-button
+        >
+      </b-col>
       <b-col
         ><b-button variant="outline-dark" @click="searchPlaces('반찬가게')"
-          >반찬가게</b-button
+          ><b-icon icon="shop" /> 반찬 가게</b-button
         ></b-col
       >
-      <b-col
-        ><b-button variant="outline-dark" @click="searchPlaces('장난감도서관')"
-          >장난감도서관</b-button
-        ></b-col
-      >
-      <b-col
-        ><b-button variant="outline-dark" @click="searchPlaces('병원')"
-          >병원</b-button
-        ></b-col
-      >
-      <b-col
-        ><b-button variant="outline-dark" @click="removeAll"
-          >초기화</b-button
-        ></b-col
-      >
+      <b-col>
+        <b-button variant="outline-dark" @click="searchPlaces('장난감도서관')"
+          ><b-icon icon="joystick" /> 장난감도서관</b-button
+        >
+      </b-col>
+      <b-col>
+        <b-button variant="outline-dark" @click="searchPlaces('병원')"
+          ><b-icon icon="building" /> 병원</b-button
+        >
+      </b-col>
     </b-row>
     <div class="map_wrap">
       <div
@@ -50,6 +45,7 @@
 import { mapState } from "vuex";
 
 const houseStore = "houseStore";
+let keyword = "";
 
 export default {
   name: "HouseMap",
@@ -256,14 +252,19 @@ export default {
     // -----------------------------------------------추가 시작-----------------------------------------------
     // 키워드 검색을 요청하는 함수입니다
     searchPlaces(data) {
-      // var keyword = document.getElementById("keyword").value;
-      var keyword = this.address + " " + data;
-      if (!keyword.replace(/^\s+|\s+$/g, "")) {
-        alert("키워드를 입력해주세요!");
-        return false;
+      if (this.address + " " + data == keyword) {
+        this.removeAll();
       }
-      // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-      this.ps.keywordSearch(keyword, this.placesSearchCB);
+      // var keyword = document.getElementById("keyword").value;
+      else {
+        keyword = this.address + " " + data;
+        if (!keyword.replace(/^\s+|\s+$/g, "")) {
+          alert("키워드를 입력해주세요!");
+          return false;
+        }
+        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+        this.ps.keywordSearch(keyword, this.placesSearchCB);
+      }
     },
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
     placesSearchCB(data, status, pagination) {
@@ -425,6 +426,7 @@ export default {
       }
     },
     removeAll() {
+      keyword = "";
       this.removeMarker();
       var listEl = document.getElementById("placesList");
       this.removeAllChildNods(listEl);
