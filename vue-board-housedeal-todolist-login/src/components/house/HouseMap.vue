@@ -17,6 +17,11 @@
         ></b-col
       >
       <b-col
+        ><b-button variant="outline-dark" @click="searchPlaces('장난감도서관')"
+          >장난감도서관</b-button
+        ></b-col
+      >
+      <b-col
         ><b-button variant="outline-dark" @click="searchPlaces('병원')"
           >병원</b-button
         ></b-col

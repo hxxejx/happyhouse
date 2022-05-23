@@ -91,6 +91,7 @@ export default {
       "CLEAR_GUGUN_LIST",
       "CLEAR_DONG_LIST",
       "SET_HOUSE_ADDRESS",
+      "CLEAR_DETAIL_HOUSE",
     ]),
     // sidoList() {
     //   this.getSido();
@@ -117,6 +118,7 @@ export default {
       var address = this.sido + this.gugun + this.dong;
       console.log(address);
       this.SET_HOUSE_ADDRESS(address);
+      this.CLEAR_DETAIL_HOUSE();
       console.log(this.dongCode);
       if (this.dongCode) this.getHouseList(this.dongCode);
     },

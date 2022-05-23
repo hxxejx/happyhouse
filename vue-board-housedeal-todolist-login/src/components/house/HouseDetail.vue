@@ -31,24 +31,15 @@
     </b-row>
     <b-row>
       <b-col>
-        <!-- <b-alert show variant="warning">층수 : {{ house.층 }}층</b-alert> -->
         <b-alert show variant="warning">지번 : {{ house.jibun }}</b-alert>
       </b-col>
     </b-row>
-    <!-- <b-row>
-      <b-col>
-        <b-alert show variant="danger"
-          >거래금액 :
-          {{
-            (parseInt(house.거래금액.replace(",", "")) * 10000) | price
-          }}원</b-alert
-        >
-      </b-col>
-    </b-row> -->
+    <deal-list :deals="deals"></deal-list>
   </b-container>
 </template>
 
 <script>
+import DealList from "@/components/house/DealList.vue";
 import { mapState } from "vuex";
 
 const houseStore = "houseStore";
@@ -56,16 +47,16 @@ const houseStore = "houseStore";
 export default {
   name: "HouseDetail",
   computed: {
-    ...mapState(houseStore, ["house"]),
-    // house() {
-    //   return this.$store.state.house;
-    // },
+    ...mapState(houseStore, ["house", "deals"]),
   },
   filters: {
     price(value) {
       if (!value) return value;
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
+  },
+  components: {
+    DealList,
   },
 };
 </script>

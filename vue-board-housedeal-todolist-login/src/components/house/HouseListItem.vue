@@ -1,6 +1,7 @@
 <template>
   <b-row
     class="m-2"
+    role="button"
     @click="selectHouse"
     @mouseover="colorChange(true)"
     @mouseout="colorChange(false)"
@@ -35,12 +36,11 @@ export default {
     house: Object,
   },
   methods: {
-    ...mapActions(houseStore, ["detailHouse"]),
+    ...mapActions(houseStore, ["detailHouse", "getDealList"]),
     ...mapActions(houseStore, ["countUpHouse"]),
     selectHouse() {
-      // console.log("listRow : ", this.house);
-      // this.$store.dispatch("getHouse", this.house);
       this.detailHouse(this.house);
+      this.getDealList(this.house.aptCode);
     },
     colorChange(flag) {
       this.isColor = flag;

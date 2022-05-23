@@ -28,4 +28,16 @@ function popularHouse(success, fail) {
   api.get(`/map/popular`).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList, countUpHouse, popularHouse };
+function dealList(params, success, fail) {
+  api.get(`/map/deal`, { params: params }).then(success).catch(fail);
+}
+
+export {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  countUpHouse,
+  popularHouse,
+  dealList,
+};
