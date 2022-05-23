@@ -2,6 +2,7 @@ package com.ssafy.vue.service;
 
 import java.util.List;
 
+import com.ssafy.vue.dto.HouseDealDto;
 import com.ssafy.vue.dto.HouseInfoDto;
 import com.ssafy.vue.dto.SidoGugunCodeDto;
 
@@ -13,5 +14,6 @@ public interface HouseMapService {
 	List<HouseInfoDto> getAptInDong(String dong) throws Exception;
 	boolean countUpHouse(int aptcode) throws Exception;
 	List<HouseInfoDto> popularHouse() throws Exception;
+	List<HouseDealDto> getAptDeal(int aptCode);
 	
 }
