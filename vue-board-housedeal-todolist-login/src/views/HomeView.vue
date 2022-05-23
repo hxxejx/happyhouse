@@ -10,11 +10,11 @@
           img-width="1024"
           img-height="480"
         >
-          <b-carousel-slide
-            caption="Welcome! Happy House"
-            text="해피하우스 서비스를 찾아주셔서 감사합니다."
-            img-src="https://picsum.photos/1024/480/?image=10"
-          ></b-carousel-slide>
+          <router-link :to="{ name: 'signUp' }">
+            <b-carousel-slide
+              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcHgGR3%2FbtrCVSjnwvh%2FglGXankMQgiPdUhKL8GEf0%2Fimg.png"
+            ></b-carousel-slide>
+          </router-link>
           <a href="https://housing.seoul.go.kr/site/main/content/sh01_040081">
             <b-carousel-slide
               img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbaTWNQ%2FbtrCS1A39ia%2FuOY72dV9sg8afvvqJbgGEK%2Fimg.png"
