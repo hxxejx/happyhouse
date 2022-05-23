@@ -28,6 +28,9 @@ import HouseSearchBar from "@/components/house/HouseSearchBar.vue";
 import HouseList from "@/components/house/HouseList.vue";
 import HouseDetail from "@/components/house/HouseDetail.vue";
 import HouseMap from "@/components/house/HouseMap.vue";
+import { mapMutations } from "vuex";
+
+const houseStore = "houseStore";
 
 export default {
   name: "HouseView",
@@ -36,6 +39,25 @@ export default {
     HouseList,
     HouseDetail,
     HouseMap,
+  },
+  methods: {
+    ...mapMutations(houseStore, [
+      "CLEAR_SIDO_LIST",
+      "CLEAR_GUGUN_LIST",
+      "CLEAR_DONG_LIST",
+      "CLEAR_HOUSE_LIST",
+      "CLEAR_DETAIL_HOUSE",
+      "CLEAR_HOUSE_ADDRESS",
+    ]),
+  },
+  created() {
+    // 구군, 동 목록, store 아파트 리스트, 디테일 초기화
+    this.CLEAR_SIDO_LIST();
+    this.CLEAR_GUGUN_LIST();
+    this.CLEAR_DONG_LIST();
+    this.CLEAR_HOUSE_LIST();
+    this.CLEAR_DETAIL_HOUSE();
+    this.CLEAR_HOUSE_ADDRESS();
   },
 };
 </script>

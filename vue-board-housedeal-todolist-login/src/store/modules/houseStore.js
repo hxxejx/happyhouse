@@ -15,6 +15,7 @@ const houseStore = {
     dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    address: "",
   },
 
   getters: {},
@@ -53,6 +54,18 @@ const houseStore = {
     },
     SET_POPULAR_HOUSE: (state, houses) => {
       state.houses = houses;
+    },
+    CLEAR_HOUSE_LIST: (state) => {
+      state.houses = [];
+    },
+    CLEAR_DETAIL_HOUSE: (state) => {
+      state.house = null;
+    },
+    SET_HOUSE_ADDRESS: (state, address) => {
+      state.address = address;
+    },
+    CLEAR_HOUSE_ADDRESS: (state) => {
+      state.address = "";
     },
   },
 

@@ -12,6 +12,7 @@
     </b-col> -->
     <b-col class="sm-3">
       <b-form-select
+        id="selectSido"
         v-model="sidoCode"
         :options="sidos"
         @change="gugunList"
@@ -19,6 +20,7 @@
     </b-col>
     <b-col class="sm-3">
       <b-form-select
+        id="selectGugun"
         v-model="gugunCode"
         :options="guguns"
         @change="dongList"
@@ -26,6 +28,7 @@
     </b-col>
     <b-col class="sm-3">
       <b-form-select
+        id="selectDong"
         v-model="dongCode"
         :options="dongs"
         @change="searchApt"
@@ -56,6 +59,9 @@ export default {
       sidoCode: null,
       gugunCode: null,
       dongCode: null,
+      sido: "",
+      gugun: "",
+      dong: "",
     };
   },
   computed: {
@@ -69,6 +75,9 @@ export default {
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
     this.getSido();
+    this.sido = "";
+    this.gugun = "";
+    this.dong = "";
   },
   methods: {
     ...mapActions(houseStore, [
@@ -81,23 +90,33 @@ export default {
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
       "CLEAR_DONG_LIST",
+      "SET_HOUSE_ADDRESS",
     ]),
     // sidoList() {
     //   this.getSido();
     // },
     gugunList() {
+      var target = document.getElementById("selectSido");
+      this.sido = target.options[target.selectedIndex].text + " ";
       console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     dongList() {
+      var target = document.getElementById("selectGugun");
+      this.gugun = target.options[target.selectedIndex].text + " ";
       console.log(this.gugunCode);
       this.CLEAR_DONG_LIST();
       this.dongCode = null;
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     searchApt() {
+      var target = document.getElementById("selectDong");
+      this.dong = target.options[target.selectedIndex].text;
+      var address = this.sido + this.gugun + this.dong;
+      console.log(address);
+      this.SET_HOUSE_ADDRESS(address);
       console.log(this.dongCode);
       if (this.dongCode) this.getHouseList(this.dongCode);
     },
