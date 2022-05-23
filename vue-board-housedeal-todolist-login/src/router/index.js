@@ -98,10 +98,16 @@ const routes = [
     component: () => import("@/views/HouseView.vue"),
   },
   {
-    path: "/todo",
-    name: "todo",
+    path: "/news",
+    name: "news",
     beforeEnter: onlyAuthUser,
-    component: () => import("@/views/TodoView.vue"),
+    component: () => import("@/views/NewsView.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
+    beforeEnter: onlyAuthUser,
+    component: () => import("@/views/AboutView.vue"),
   },
   {
     path: "/comment/list/:articleno",
