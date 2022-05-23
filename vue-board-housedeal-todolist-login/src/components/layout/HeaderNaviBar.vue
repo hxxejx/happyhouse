@@ -4,7 +4,7 @@
       <b-navbar-brand href="#">
         <router-link to="/">
           <img
-            src="@/assets/ssafy_logo.png"
+            src="@/assets/logo.png"
             class="d-inline-block align-middle"
             width="100px"
             alt="ssafy"
