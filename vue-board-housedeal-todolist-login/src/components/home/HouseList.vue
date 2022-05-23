@@ -5,13 +5,13 @@
         <b-table-simple>
           <b-thead head-variant="white">
             <b-tr>
-              <b-th colspan="3">인기 매물 BEST</b-th>
+              <b-th>인기 매물 BEST</b-th>
             </b-tr>
           </b-thead>
           <tbody>
             <house-list-item
               v-for="house in houses"
-              :key="house.aptName"
+              :key="house.aptCode"
               v-bind="house"
             />
           </tbody>
@@ -32,11 +32,9 @@ export default {
   components: {
     HouseListItem,
   },
-  data() {
-    return {};
-  },
   created() {
     this.getPopularHouse();
+    console.log("인기매물 출력");
   },
   computed: {
     ...mapState(houseStore, ["houses"]),
