@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.vue.dto.HouseDealDto;
 import com.ssafy.vue.dto.HouseInfoDto;
 import com.ssafy.vue.dto.SidoGugunCodeDto;
 import com.ssafy.vue.service.HouseMapService;
@@ -65,6 +66,9 @@ public class HouseMapController {
 		return new ResponseEntity<List<HouseInfoDto>>(houseMapService.popularHouse(), HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/deal")
+	public ResponseEntity<List<HouseDealDto>> deal(@RequestParam("aptCode") int aptCode) throws Exception {
+		return new ResponseEntity<List<HouseDealDto>>(houseMapService.getAptDeal(aptCode), HttpStatus.OK);
+	}
 	
 }

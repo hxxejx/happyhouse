@@ -5,6 +5,7 @@ import {
   houseList,
   countUpHouse,
   popularHouse,
+  dealList,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -16,6 +17,7 @@ const houseStore = {
     houses: [],
     house: null,
     address: "",
+    deals: [],
   },
 
   getters: {},
@@ -66,6 +68,12 @@ const houseStore = {
     },
     CLEAR_HOUSE_ADDRESS: (state) => {
       state.address = "";
+    },
+    SET_DEAL_LIST: (state, deals) => {
+      state.deals = deals;
+    },
+    CLEAR_DEAL_LIST: (state) => {
+      state.deals = [];
     },
   },
 
@@ -165,6 +173,22 @@ const houseStore = {
       popularHouse(
         ({ data }) => {
           commit("SET_POPULAR_HOUSE", data);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    getDealList: ({ commit }, aptCode) => {
+      const params = {
+        aptCode: aptCode,
+      };
+      dealList(
+        params,
+        ({ data }) => {
+          // console.log(commit, response);
+          // console.log(data);
+          commit("SET_DEAL_LIST", data);
         },
         (error) => {
           console.log(error);
