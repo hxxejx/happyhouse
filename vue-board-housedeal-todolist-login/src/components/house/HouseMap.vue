@@ -87,7 +87,7 @@ export default {
       }
       // 마커 이미지 커스터마이징
       const imgSrc = require("@/assets/marker_red.png");
-      const imgSize = new kakao.maps.Size(35, 35);
+      const imgSize = new kakao.maps.Size(40, 40);
       const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
       // 마커 표시
       positions.forEach((position) => {

@@ -46,7 +46,7 @@ export default {
         this.getArticleList();
       } else if (this.selected == "articleno") {
         if (isNaN(this.word)) {
-          alert("숫자 입력!");
+          alert("글 번호를 입력해주세요.");
         } else {
           this.searchByNo();
         }

@@ -15,10 +15,10 @@
           size="sm"
           @click="moveModifyArticle"
           class="mr-2"
-          >글수정</b-button
+          >수정</b-button
         >
         <b-button variant="outline-danger" size="sm" @click="deleteArticle"
-          >글삭제</b-button
+          >삭제</b-button
         >
       </b-col>
     </b-row>
@@ -84,7 +84,7 @@ export default {
         this.article.hit += 1;
       },
       (error) => {
-        console.log("삭제시 에러발생!!", error);
+        console.log("삭제 에러", error);
       },
     );
     this.pdata.articleno = this.$route.params.articleno;
@@ -104,13 +104,13 @@ export default {
       this.$router.push({ name: "noticeList" });
     },
     moveModifyArticle() {
-      this.$router.replace({
+      this.$router.push({
         name: "noticeModify",
         params: { articleno: this.article.articleno },
       });
     },
     deleteArticle() {
-      if (confirm("정말로 삭제?")) {
+      if (confirm("삭제 하시겠습니까?")) {
         deleteArticle(this.article.articleno, () => {
           this.$router.push({ name: "noticeList" });
         });

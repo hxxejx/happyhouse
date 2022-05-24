@@ -1,7 +1,7 @@
 <template>
   <b-container v-if="house && house.length != 0" class="bv-example-row mt-3">
     <b-row>
-      <b-col><b-alert show class="text-center">아파트 세부정보</b-alert></b-col>
+      <b-col><b-alert show class="text-center">아파트 정보</b-alert></b-col>
     </b-row>
     <b-row class="mb-3">
       <b-col

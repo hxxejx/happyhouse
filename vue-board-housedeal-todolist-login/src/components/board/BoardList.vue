@@ -2,9 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
-          >글쓰기</b-button
-        >
+        <b-button variant="outline-primary" @click="moveWrite()">작성</b-button>
       </b-col>
     </b-row>
     <b-row>

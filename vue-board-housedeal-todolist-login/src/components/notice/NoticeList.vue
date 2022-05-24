@@ -3,7 +3,7 @@
     <b-row class="mb-1">
       <b-col class="text-right">
         <b-button variant="outline-primary" @click="moveWrite()" v-if="isAdmin"
-          >글쓰기</b-button
+          >작성</b-button
         >
       </b-col>
     </b-row>

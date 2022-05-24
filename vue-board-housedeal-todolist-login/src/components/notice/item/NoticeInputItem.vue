@@ -48,12 +48,12 @@
           variant="primary"
           class="m-1"
           v-if="this.type === 'register'"
-          >글작성</b-button
+          >작성</b-button
         >
         <b-button type="submit" variant="primary" class="m-1" v-else
-          >글수정</b-button
+          >수정</b-button
         >
-        <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
+        <b-button type="reset" variant="danger" class="m-1">취소</b-button>
       </b-form>
     </b-col>
   </b-row>
@@ -120,7 +120,7 @@ export default {
         (err = false),
         this.$refs.content.focus());
 
-      if (!err) alert(msg);
+      if (!err) console.log(msg);
       else
         this.type === "register" ? this.registArticle() : this.modifyArticle();
     },
@@ -129,7 +129,7 @@ export default {
       this.article.articleno = 0;
       this.article.subject = "";
       this.article.content = "";
-      this.$router.push({ name: "noticeList" });
+      this.$router.back();
     },
     registArticle() {
       writeArticle(
@@ -139,11 +139,11 @@ export default {
           content: this.article.content,
         },
         ({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
+          let msg = "등록 에러 발생";
           if (data === "success") {
-            msg = "등록이 완료되었습니다.";
+            msg = "등록 완료";
           }
-          alert(msg);
+          console.log(msg);
           this.moveList();
         },
         (error) => {
@@ -160,11 +160,11 @@ export default {
           content: this.article.content,
         },
         ({ data }) => {
-          let msg = "수정 처리시 문제가 발생했습니다.";
+          let msg = "수정 에러 발생";
           if (data === "success") {
-            msg = "수정이 완료되었습니다.";
+            msg = "수정 완료";
           }
-          alert(msg);
+          console.log(msg);
           this.$router.push({ name: "noticeList" });
         },
         (error) => {
