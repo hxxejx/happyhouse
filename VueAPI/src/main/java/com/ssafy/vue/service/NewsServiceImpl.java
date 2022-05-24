@@ -36,7 +36,7 @@ public class NewsServiceImpl implements NewsService {
 
         String text = null;
         try {
-            text = URLEncoder.encode("신혼부부 지원사업", "UTF-8");
+            text = URLEncoder.encode("신혼부부 내 집", "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }

@@ -67,7 +67,6 @@ public class NewsController {
 	@Autowired
 	ResourceLoader resLoader;
 
-	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@GetMapping 
 	public String listNews() {
 		logger.debug("listNews : {}", newsService.listNews());

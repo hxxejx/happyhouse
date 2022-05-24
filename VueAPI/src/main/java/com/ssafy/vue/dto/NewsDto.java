@@ -10,6 +10,7 @@ public class NewsDto {
 	private String originallink;
 	private String description;
 	private String pubDate;
+	
 	public String getTitle() {
 		return title;
 	}
