@@ -2,16 +2,19 @@
   <div id="app">
     <navi-bar class="py-0 shadow" />
     <router-view />
+    <footer-bar class="py-0 footer"></footer-bar>
   </div>
 </template>
 
 <script>
 import NaviBar from "@/components/layout/HeaderNaviBar.vue";
+import FooterBar from "@/components/layout/FooterBar.vue";
 
 export default {
   name: "App",
   components: {
     NaviBar,
+    FooterBar,
   },
 };
 </script>
@@ -23,8 +26,4 @@ export default {
 a {
   text-decoration: none;
 }
-
-/* a.router-link-exact-active {
-  color: #3aa4ca;
-} */
 </style>
