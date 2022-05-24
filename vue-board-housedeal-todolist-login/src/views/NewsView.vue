@@ -7,9 +7,6 @@
 <script>
 export default {
   name: "NewsView",
-  created() {
-    console.log("뉴스 뷰");
-  },
 };
 </script>
 <style scoped>

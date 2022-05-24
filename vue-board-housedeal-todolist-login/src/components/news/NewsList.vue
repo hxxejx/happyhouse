@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-table-simple>
+        <b-table-simple hover>
           <b-thead head-variant="white">
             <b-tr>
               <b-th>제목</b-th>
@@ -13,7 +13,7 @@
           <tbody>
             <news-item
               v-for="article in articles"
-              :key="article.title"
+              :key="article.originallink"
               v-bind="article"
             />
           </tbody>
@@ -35,7 +35,6 @@ export default {
     NewsItem,
   },
   created() {
-    console.log("뉴스 리스트");
     this.getArticleList();
   },
   computed: {

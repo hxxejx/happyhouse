@@ -1,7 +1,6 @@
 <template>
   <b-tr>
     <b-td v-html="title" @click="goToLink"></b-td>
-    <b-td v-html="description" @click="goToLink"></b-td>
     <b-td>{{ pubDate | dateFormat }}</b-td>
   </b-tr>
 </template>
@@ -14,7 +13,6 @@ export default {
   props: {
     title: String,
     originallink: String,
-    description: String,
     pubDate: String,
   },
   methods: {

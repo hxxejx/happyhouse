@@ -1,12 +1,17 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row>
-      <b-col v-if="articles.length">
-        <b-table-simple hover responsive>
+      <b-col>
+        <b-table-simple hover>
+          <b-thead head-variant="white">
+            <b-tr>
+              <b-th colspan="2">NEWS</b-th>
+            </b-tr>
+          </b-thead>
           <tbody>
-            <news-list-item
+            <news-item
               v-for="article in articles"
-              :key="article.articleno"
+              :key="article.originallink"
               v-bind="article"
             />
           </tbody>
@@ -18,13 +23,14 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import NoticeListItem from "@/components/home/item/NewsListItem";
+import NewsItem from "@/components/home/item/NewsItem.vue";
 
 const newsStore = "newsStore";
+
 export default {
   name: "NewsList",
   components: {
-    NewsListItem,
+    NewsItem,
   },
   created() {
     this.getArticleList();
@@ -35,6 +41,11 @@ export default {
   methods: {
     ...mapActions(newsStore, ["getArticleList"]),
   },
+  // filters: {
+  //   dateFormat(regtime) {
+  //     return moment(new Date(regtime)).format("YY.MM.DD");
+  //   },
+  // },
 };
 </script>
 

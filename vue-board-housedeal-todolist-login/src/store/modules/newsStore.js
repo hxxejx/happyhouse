@@ -22,8 +22,7 @@ const newsStore = {
       listArticle(
         param,
         ({ data }) => {
-          console.log("뉴스");
-          commit("SET_ARTICLE_LIST", data);
+          commit("SET_ARTICLE_LIST", data.items);
         },
         (error) => {
           console.log(error);
