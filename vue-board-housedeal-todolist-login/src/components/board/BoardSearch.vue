@@ -9,8 +9,8 @@
           v-model.trim="word"
           placeholder="검색어 입력"
         ></b-form-input>
-        <b-button variant="outline-success" @click="beforeSearch"
-          >검색</b-button
+        <b-button variant="outline-success" @click="beforeSearch">
+          검색</b-button
         >
       </b-input-group>
     </b-col>

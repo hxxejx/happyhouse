@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-table-simple caption-top>
+        <b-table-simple>
           <b-thead head-variant="light">
             <b-tr>
               <b-th>NEW 거래 매물</b-th>
