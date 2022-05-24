@@ -1,6 +1,6 @@
 <template>
   <b-tr>
-    <b-td v-html="title" @click="goToLink"></b-td>
+    <b-td class="subject" v-html="title" @click="goToLink"></b-td>
   </b-tr>
 </template>
 
@@ -19,4 +19,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.subject {
+  font-weight: lighter;
+}
+</style>
