@@ -24,4 +24,7 @@
 .footer {
   border-radius: 0;
 }
+* {
+  color: white;
+}
 </style>
