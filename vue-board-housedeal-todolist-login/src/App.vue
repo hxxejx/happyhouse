@@ -4,7 +4,7 @@
     <!-- <router-view id="wrapper" /> -->
     <router-view class="flex-column min-vh-100 mb-5 pb-5" />
     <!-- <footer-bar class="py-0 footer"></footer-bar> -->
-    <footer-bar class="py-0 bg-dark mt-auto"></footer-bar>
+    <footer-bar class="py-0 bg-light mt-auto"></footer-bar>
   </div>
 </template>
 
