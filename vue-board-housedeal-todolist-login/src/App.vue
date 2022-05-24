@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navi-bar class="py-0" />
+    <navi-bar class="py-0 shadow" />
     <router-view />
   </div>
 </template>
@@ -18,9 +18,7 @@ export default {
 
 <style>
 * {
-  /* color: black; */
-  /* padding: 0;
-  margin: 0; */
+  font-family: "Gowun Dodum", sans-serif;
 }
 a {
   text-decoration: none;

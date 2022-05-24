@@ -1,13 +1,13 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 text-justify">
     <b-row>
       <b-col>
         <b-table-simple>
-          <b-thead head-variant="light">
-            <b-tr>
-              <b-th>인기 매물 BEST</b-th>
-            </b-tr>
-          </b-thead>
+          <b-thead class="title"
+            ><font color="#FF6347"
+              ><b-icon icon="graph-up"></b-icon> HiT!
+            </font></b-thead
+          >
           <tbody>
             <house-list-item
               v-for="house in houses1"
@@ -44,4 +44,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.title {
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
+}
+</style>

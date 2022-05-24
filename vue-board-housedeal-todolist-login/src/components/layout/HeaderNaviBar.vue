@@ -20,31 +20,26 @@
         <b-nav-item href="#"
           ><router-link :to="{ name: 'notice' }" class="link"
             ><b-icon icon="file-text" font-scale="1.5"></b-icon>
-            NOTICE</router-link
+            공지사항</router-link
           ></b-nav-item
         >
 
         <b-nav-item href="#"
           ><router-link :to="{ name: 'house' }" class="link"
-            ><b-icon icon="house" font-scale="1.5"></b-icon> APT
-            INFO</router-link
+            ><b-icon icon="house" font-scale="1.5"></b-icon> 내 집
+            찾기</router-link
           ></b-nav-item
         >
         <b-nav-item href="#"
           ><router-link :to="{ name: 'news' }" class="link"
             ><b-icon icon="newspaper" font-scale="1.5"></b-icon>
-            NEWS</router-link
+            뉴스</router-link
           ></b-nav-item
         >
         <b-nav-item href="#"
           ><router-link :to="{ name: 'board' }" class="link"
             ><b-icon icon="question-circle" font-scale="1.5"></b-icon>
-            SUPPORT</router-link
-          ></b-nav-item
-        >
-        <b-nav-item href="#"
-          ><router-link :to="{ name: 'about' }" class="link"
-            ><b-icon icon="person" font-scale="1.5"></b-icon> ABOUT</router-link
+            고객지원</router-link
           ></b-nav-item
         >
       </b-navbar-nav>
@@ -59,7 +54,8 @@
                 size="2em"
               ></b-avatar>
               <span class="link">
-                Welcome! {{ userInfo.username }}({{ userInfo.userid }})</span
+                {{ userInfo.username }}({{ userInfo.userid }})님,
+                환영합니다!</span
               >
             </template>
             <b-dropdown-item href="#"

@@ -1,12 +1,10 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 text-justify">
     <b-row>
       <b-col>
         <b-table-simple hover>
-          <b-thead head-variant="light">
-            <b-tr>
-              <b-th colspan="2">NEWS</b-th>
-            </b-tr>
+          <b-thead class="title">
+            <font color="#2E8B57"><b-icon icon="newspaper"></b-icon> NEWS</font>
           </b-thead>
           <tbody>
             <news-item
@@ -59,6 +57,8 @@ export default {
   text-align: left;
 }
 .title {
-  border-bottom: 1px solid black;
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
 }
 </style>

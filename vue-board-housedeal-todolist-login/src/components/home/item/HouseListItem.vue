@@ -1,9 +1,6 @@
 <template>
   <b-tr>
-    <b-td
-      ><i
-        ><b><font color="orangered">HiT!</font></b></i
-      >
+    <b-td>
       {{ dongName }} <b>{{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
     >
   </b-tr>

@@ -1,13 +1,13 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 text-justify">
     <b-row>
       <b-col>
         <b-table-simple>
-          <b-thead head-variant="light">
-            <b-tr>
-              <b-th>NEW 거래 매물</b-th>
-            </b-tr>
-          </b-thead>
+          <b-thead class="title">
+            <font color="#6495ED"
+              ><b-icon icon="bell-fill"></b-icon> NEW!</font
+            ></b-thead
+          >
           <tbody>
             <house-deal-list-item
               v-for="house in houses2"
@@ -44,4 +44,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.title {
+  font-size: large;
+  font-style: italic;
+  font-weight: bold;
+}
+</style>

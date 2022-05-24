@@ -1,9 +1,6 @@
 <template>
   <b-tr>
-    <b-td
-      ><i
-        ><b><font color="gold">NEW!</font></b></i
-      >
+    <b-td>
       <b> {{ aptName }}</b> {{ dealAmount }}만원에 거래되었습니다</b-td
     >
   </b-tr>
