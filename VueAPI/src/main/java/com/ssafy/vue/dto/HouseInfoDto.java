@@ -15,6 +15,9 @@ public class HouseInfoDto {
 	private int hit;
 	private String recentPrice;
 	private String dealAmount;
+	private String roadName;
+	private String roadNameBonbun;
+	private String roadNameBubun;
 
 	public long getAptCode() {
 		return aptCode;
@@ -126,6 +129,30 @@ public class HouseInfoDto {
 
 	public void setDealAmount(String dealAmount) {
 		this.dealAmount = dealAmount;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
+	}
+
+	public String getRoadNameBonbun() {
+		return roadNameBonbun;
+	}
+
+	public void setRoadNameBonbun(String roadNameBonbun) {
+		this.roadNameBonbun = roadNameBonbun;
+	}
+
+	public String getRoadNameBubun() {
+		return roadNameBubun;
+	}
+
+	public void setRoadNameBubun(String roadNameBubun) {
+		this.roadNameBubun = roadNameBubun;
 	}
 
 	@Override
