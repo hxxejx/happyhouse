@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navi-bar />
+    <navi-bar class="py-0" />
     <router-view />
   </div>
 </template>

@@ -28,23 +28,24 @@
         </b-carousel>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col> </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <house-deal-list></house-deal-list>
-      </b-col>
-      <b-col>
+    <b-tr>
+      <b-td rowspan="2"><news-list></news-list></b-td>
+      <b-td>
         <house-list></house-list>
-      </b-col>
-    </b-row>
+      </b-td>
+    </b-tr>
+    <b-tr>
+      <b-td>
+        <house-deal-list></house-deal-list>
+      </b-td>
+    </b-tr>
   </b-container>
 </template>
 
 <script>
 import HouseList from "@/components/home/HouseList.vue";
 import HouseDealList from "@/components/home/HouseDealList.vue";
+import NewsList from "@/components/home/NewsList.vue";
 
 export default {
   name: "HomeView",
@@ -54,6 +55,7 @@ export default {
   components: {
     HouseList,
     HouseDealList,
+    NewsList,
   },
   methods: {
     gotoSite() {
