@@ -6,14 +6,23 @@
       @cancle-modify="changeState"
       @changed="changeComment"
     ></comment-modify>
-    <b-card v-if="isDelete">
-      <b-card-text>작성자: {{ nowcomment.userid }} </b-card-text>
-      <b-card-text>내용: {{ nowcomment.comment }}</b-card-text>
-      <b-card-text>일시: {{ nowcomment.regtime }}</b-card-text>
-      <div v-if="this.isAdmin">
+    <b-card v-if="isDelete" header-tag="header" footer-tag="footer">
+      <template #header>
+        <h6 class="mb-0">{{ nowcomment.regtime }}</h6>
+      </template>
+      <b-card-text
+        >안녕하세요! 신혼부부를 위한 내 집 찾기 프로젝트, 해피하우스입니다.
+        이용에 불편을 드려 죄송합니다.</b-card-text
+      >
+      <b-card-text>{{ nowcomment.comment }}</b-card-text>
+      <b-card-text
+        >더 자세한 상담을 원하시면 삼성 청년 SW 아카데미(02-3429-5100)으로 문의
+        주세요.</b-card-text
+      >
+      <template #footer v-if="this.isAdmin">
         <button @click="moveModify" class="btn card-link">수정</button>
         <button @click="moveDelete" class="btn card-link">삭제</button>
-      </div>
+      </template>
     </b-card>
   </div>
 </template>
