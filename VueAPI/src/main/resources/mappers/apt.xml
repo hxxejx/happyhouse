@@ -37,7 +37,7 @@
 		order by aptName
 	</select>
 
-	<update id="countUpHouse" parameterType="int">
+	<update id="countUpHouse" parameterType="long">
 		update houseinfo
 		set hit = hit + 1
 		where aptCode = #{aptcode}
@@ -50,7 +50,7 @@
 		limit 3
 	</select>
 
-	<select id="getAptDeal" parameterType="int" resultType="HouseDealDto">
+	<select id="getAptDeal" parameterType="long" resultType="HouseDealDto">
 		select aptCode, dealAmount, dealYear, dealMonth, dealDay, area, floor
 		from housedeal
 		where aptCode = #{aptCode}

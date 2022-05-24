@@ -52,7 +52,7 @@ public class HouseMapController {
 	}
 	
 	@GetMapping("/hit/{aptcode}")
-	public ResponseEntity<String> countUpHouse(@PathVariable int aptcode) throws Exception {
+	public ResponseEntity<String> countUpHouse(@PathVariable long aptcode) throws Exception {
 		logger.debug("countUpNotice - 호출");
 		if (houseMapService.countUpHouse(aptcode)) {
 			return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -67,7 +67,7 @@ public class HouseMapController {
 	}
 	
 	@GetMapping("/deal")
-	public ResponseEntity<List<HouseDealDto>> deal(@RequestParam("aptCode") int aptCode) throws Exception {
+	public ResponseEntity<List<HouseDealDto>> deal(@RequestParam("aptCode") long aptCode) throws Exception {
 		return new ResponseEntity<List<HouseDealDto>>(houseMapService.getAptDeal(aptCode), HttpStatus.OK);
 	}
 	
