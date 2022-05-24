@@ -92,6 +92,9 @@ export default {
       "CLEAR_DONG_LIST",
       "SET_HOUSE_ADDRESS",
       "CLEAR_DETAIL_HOUSE",
+      "CLEAR_HOUSE_LIST",
+      "CLEAR_DETAIL_HOUSE",
+      "CLEAR_HOUSE_ADDRESS",
     ]),
     // sidoList() {
     //   this.getSido();
@@ -99,16 +102,24 @@ export default {
     gugunList() {
       var target = document.getElementById("selectSido");
       this.sido = target.options[target.selectedIndex].text + " ";
-      console.log(this.sidoCode);
+      // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
+      this.CLEAR_DONG_LIST();
+      this.CLEAR_HOUSE_LIST();
+      this.CLEAR_DETAIL_HOUSE();
+      this.CLEAR_HOUSE_ADDRESS();
       this.gugunCode = null;
+      this.dongCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     dongList() {
       var target = document.getElementById("selectGugun");
       this.gugun = target.options[target.selectedIndex].text + " ";
-      console.log(this.gugunCode);
+      // console.log(this.gugunCode);
       this.CLEAR_DONG_LIST();
+      this.CLEAR_HOUSE_LIST();
+      this.CLEAR_DETAIL_HOUSE();
+      this.CLEAR_HOUSE_ADDRESS();
       this.dongCode = null;
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
@@ -116,10 +127,10 @@ export default {
       var target = document.getElementById("selectDong");
       this.dong = target.options[target.selectedIndex].text;
       var address = this.sido + this.gugun + this.dong;
-      console.log(address);
+      // console.log(address);
       this.SET_HOUSE_ADDRESS(address);
       this.CLEAR_DETAIL_HOUSE();
-      console.log(this.dongCode);
+      // console.log(this.dongCode);
       if (this.dongCode) this.getHouseList(this.dongCode);
     },
   },

@@ -6,50 +6,9 @@
           :pressed.sync="btn.state"
           variant="outline-dark"
           @click="searchPlaces(btn.caption)"
-          v-bind:disabled="addressIn"
           ><b-icon :icon="btn.icon" /> {{ btn.caption }}</b-button
         >
       </b-col>
-      <!-- <b-col>
-        <b-button
-          variant="outline-dark"
-          @click="searchPlaces('공원')"
-          v-bind:disabled="addressIn"
-          ><b-icon icon="bicycle" /> 공원</b-button
-        ></b-col
-      >
-      <b-col>
-        <b-button
-          variant="outline-dark"
-          @click="searchPlaces('어린이집')"
-          v-bind:disabled="addressIn"
-          ><b-icon icon="people-fill" /> 어린이집</b-button
-        >
-      </b-col>
-      <b-col
-        ><b-button
-          variant="outline-dark"
-          @click="searchPlaces('반찬가게')"
-          v-bind:disabled="addressIn"
-          ><b-icon icon="shop" /> 반찬가게</b-button
-        ></b-col
-      >
-      <b-col>
-        <b-button
-          variant="outline-dark"
-          @click="searchPlaces('장난감도서관')"
-          v-bind:disabled="addressIn"
-          ><b-icon icon="joystick" /> 장난감도서관</b-button
-        >
-      </b-col>
-      <b-col>
-        <b-button
-          variant="outline-dark"
-          @click="searchPlaces('병원')"
-          v-bind:disabled="addressIn"
-          ><b-icon icon="building" /> 병원</b-button
-        >
-      </b-col> -->
     </b-row>
     <div class="map_wrap">
       <div
@@ -65,7 +24,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 const houseStore = "houseStore";
 let keyword = "";
@@ -81,8 +40,6 @@ export default {
       ps: null,
       infowindow: null,
       search_markers: [],
-      // keyword: "",
-      // overlay: null,
       addressIn: true,
       searchCheck: false,
       buttons: [
@@ -94,8 +51,9 @@ export default {
       ],
     };
   },
-  // -----------------------------------------------추가 시작----------------------------------------------- // -----------------------------------------------추가 끝-----------------------------------------------
   methods: {
+    ...mapActions(houseStore, ["getDealList"]),
+    ...mapMutations(houseStore, ["SET_DETAIL_HOUSE"]),
     initMap() {
       const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       const options = {
@@ -104,7 +62,6 @@ export default {
         level: 3, //지도의 레벨(확대, 축소 정도)
       };
       this.map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-      // -----------------------------------------------추가 시작-----------------------------------------------
       // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
       // 장소 검색 객체를 생성합니다
       this.ps = new kakao.maps.services.Places();
@@ -113,13 +70,10 @@ export default {
       this.infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
       // 키워드로 장소를 검색합니다
       // this.searchPlaces();
-      // -----------------------------------------------추가 끝-----------------------------------------------
       this.setPositions();
     },
     setPositions() {
       this.positions = [...this.houses];
-      // console.log("HMP" + this.positions);
-      // console.log(this.positions[0].lat);
       if (this.positions.length > 0) {
         this.displayMarkers(this.positions);
       }
@@ -139,35 +93,12 @@ export default {
       positions.forEach((position) => {
         const marker = new kakao.maps.Marker({
           map: this.map,
-          // position: position.latlng, // 마커 위치
           position: new kakao.maps.LatLng(position.lat, position.lng), // 마커 위치
           title: position.aptName, // 마우스 오버 표시 제목
           image: markerImage, // 마커이미지
           clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
         });
         this.markers.push(marker);
-        // 마커에 표시할 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content: `<div>${position.aptName}</div>`, // 인포윈도우에 표시할 내용
-        });
-        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-        // 이벤트 리스너로는 클로저를 만들어 등록합니다
-        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-        kakao.maps.event.addListener(
-          marker,
-          "mouseover",
-          this.makeOverListener(this.map, marker, infowindow),
-        );
-        kakao.maps.event.addListener(
-          marker,
-          "mouseout",
-          this.makeOutListener(infowindow),
-        );
-        // 마커에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(marker, "click", function () {
-          // 마커 위에 인포윈도우를 표시합니다
-          // infowindow.open(this.map, marker);
-        });
         // 지도 이동
         // 배열.reduce((누적값, 현재값, 인덱스, 요소) => {return 결과값}, 초기값);
         const bounds = positions.reduce(
@@ -177,27 +108,6 @@ export default {
         );
         this.map.setBounds(bounds);
         var self = this;
-        // 커스텀 오버레이에 표시할 컨텐츠 입니다
-        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-        // 별도의 이벤트 메소드를 제공하지 않습니다
-        // var content = `<div class="wrap">
-        //       <div class="info">
-        //           <div class="title">
-        //               카카오 스페이스닷원
-        //               <div class="close" onclick="closeOverlay()" title="닫기"></div>
-        //           </div>
-        //           <div class="body">
-        //               <div class="img">
-        //                   <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">
-        //               </div>
-        //               <div class="desc">
-        //                   <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>
-        //                   <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>
-        //                   <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>
-        //               </div>
-        //           </div>
-        //       </div>
-        //   </div>`;
         var content = document.createElement("div");
         content.className = "wrap overlay-off";
         var info = document.createElement("div");
@@ -205,14 +115,13 @@ export default {
         var title = document.createElement("div");
         title.className = "title";
         title.innerHTML = position.aptName;
-        // console.log("position", position);
-        var close = document.createElement("div");
-        close.className = "close";
+        // var close = document.createElement("div");
+        // close.className = "close";
         // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
-        close.addEventListener("click", function () {
-          overlay.setMap(null);
-        });
-        close.title = "닫기";
+        // close.addEventListener("click", function () {
+        //   overlay.setMap(null);
+        // });
+        // close.title = "닫기";
         var body = document.createElement("div");
         body.className = "body";
         var img = document.createElement("div");
@@ -233,7 +142,7 @@ export default {
         content.appendChild(info);
         info.appendChild(title);
         info.appendChild(body);
-        title.appendChild(close);
+        // title.appendChild(close);
         body.appendChild(img);
         img.appendChild(src);
         body.appendChild(desc);
@@ -247,50 +156,28 @@ export default {
           position: marker.getPosition(),
           zIndex: 1,
         });
-        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-        // kakao.maps.event.addListener(marker, "click", function () {
-        //   self.overlay.setMap(self.map);
-        // });
-        // var content = document.createElement("div");
-        // content.className = "overlay-off";
-        // content.innerHTML = position.aptName;
-        // var closeBtn = document.createElement("button");
-        // closeBtn.innerHTML = "닫기";
-        // closeBtn.onclick = function () {
-        //   overlay.setMap(null);
-        // };
-        // content.appendChild(closeBtn);
+
         overlay.setContent(content);
-        kakao.maps.event.addListener(marker, "click", function () {
+        kakao.maps.event.addListener(marker, "mouseover", function () {
           overlay.setMap(self.map);
           content.className = "wrap overlay-on";
         });
+        kakao.maps.event.addListener(marker, "mouseout", function () {
+          content.className = "wrap overlay-off";
+        });
+        kakao.maps.event.addListener(marker, "click", function () {
+          console.log(position);
+          self.SET_DETAIL_HOUSE(position);
+          self.getDealList(position.aptCode);
+        });
       });
     },
-    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-    makeOverListener(map, marker, infowindow) {
-      return function () {
-        infowindow.open(map, marker);
-      };
-    },
-    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-    makeOutListener(infowindow) {
-      return function () {
-        infowindow.close();
-      };
-    },
-    // closeOverlay() {
-    //   overlay.setMap(null);
-    // },
-    // -----------------------------------------------추가 시작-----------------------------------------------
     // 키워드 검색을 요청하는 함수입니다
     searchPlaces(data) {
       if (this.address + " " + data == keyword) {
         this.removeAll();
         this.searchCheck = false;
-      }
-      // var keyword = document.getElementById("keyword").value;
-      else {
+      } else {
         keyword = this.address + " " + data;
         if (!keyword.replace(/^\s+|\s+$/g, "")) {
           alert("키워드를 입력해주세요!");
@@ -316,6 +203,11 @@ export default {
         this.displayPagination(pagination);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert("검색 결과가 존재하지 않습니다.");
+        this.searchCheck = false;
+        this.removeMarker();
+        for (let btn of this.buttons) {
+          btn.state = false;
+        }
         return;
       } else if (status === kakao.maps.services.Status.ERROR) {
         alert("검색 결과 중 오류가 발생했습니다.");
@@ -375,7 +267,7 @@ export default {
           '<span class="markerbg marker_' +
           (index + 1) +
           '"></span>' +
-          '<div class="info">' +
+          '<div class="search-info">' +
           "   <h5>" +
           places.place_name +
           "</h5>";
@@ -426,6 +318,12 @@ export default {
       }
       this.search_markers = [];
     },
+    removeAPTMarker() {
+      for (var i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(null);
+      }
+      this.markers = [];
+    },
     // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
     displayPagination(pagination) {
       var paginationEl = document.getElementById("pagination"),
@@ -475,18 +373,26 @@ export default {
         paginationEl.removeChild(paginationEl.lastChild);
       }
     },
-    // -----------------------------------------------추가 끝-----------------------------------------------
   },
   computed: {
     ...mapState(houseStore, ["houses", "address"]),
   },
   watch: {
     houses: function () {
+      this.removeAPTMarker();
       this.setPositions();
       this.removeAll();
+      this.searchCheck = false;
+      this.removeMarker();
+      for (let btn of this.buttons) {
+        btn.state = false;
+      }
     },
     address: function () {
       this.addressIn = false;
+      if (this.address.length <= 0) {
+        this.addressIn = true;
+      }
     },
   },
   mounted() {
@@ -508,9 +414,6 @@ export default {
 </script>
 
 <style>
-/* .overlay-on {
-  background-color: white;
-} */
 .overlay-off {
   display: none;
 }
@@ -552,7 +455,7 @@ export default {
   font-size: 14px;
   font-weight: bold;
 }
-.info .close {
+/* .info .close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -560,10 +463,10 @@ export default {
   width: 17px;
   height: 17px;
   background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
-}
-.info .close:hover {
+} */
+/* .info .close:hover {
   cursor: pointer;
-}
+} */
 .info .body {
   position: relative;
   overflow: hidden;
@@ -602,6 +505,15 @@ export default {
   width: 22px;
   height: 12px;
   background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
+}
+.search-info:after {
+  content: "";
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: 0;
+  width: 22px;
+  height: 12px;
 }
 .info .link {
   color: #5085bb;
@@ -674,23 +586,23 @@ export default {
   margin-top: 4px;
 }
 #placesList .item h5,
-#placesList .item .info {
+#placesList .item .search-info {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-#placesList .item .info {
+#placesList .item .search-info {
   padding: 10px 0 10px 55px;
 }
-#placesList .info .gray {
+#placesList .search-info .gray {
   color: #8a8a8a;
 }
-#placesList .info .jibun {
+#placesList .search-info .jibun {
   padding-left: 26px;
   background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
     no-repeat;
 }
-#placesList .info .tel {
+#placesList .search-info .tel {
   color: #009900;
 }
 #placesList .item .markerbg {
