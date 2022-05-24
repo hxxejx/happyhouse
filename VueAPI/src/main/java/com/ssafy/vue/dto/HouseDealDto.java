@@ -2,8 +2,8 @@ package com.ssafy.vue.dto;
 
 public class HouseDealDto {
 
-	private int no;
-	private int aptCode;
+	private long no;
+	private long aptCode;
 	private String dealAmount;
 	private int dealYear;
 	private int dealMonth;
@@ -13,19 +13,19 @@ public class HouseDealDto {
 	private String type;
 	private String rentMoney;
 
-	public int getNo() {
+	public long getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(long no) {
 		this.no = no;
 	}
 
-	public int getAptCode() {
+	public long getAptCode() {
 		return aptCode;
 	}
 
-	public void setAptCode(int aptCode) {
+	public void setAptCode(long aptCode) {
 		this.aptCode = aptCode;
 	}
 

@@ -1,7 +1,7 @@
 package com.ssafy.vue.dto;
 
 public class HouseInfoDto {
-	private int aptCode;
+	private long aptCode;
 	private String aptName;
 	private String dongCode;
 	private String dongName;
@@ -16,11 +16,11 @@ public class HouseInfoDto {
 	private String recentPrice;
 	private String dealAmount;
 
-	public int getAptCode() {
+	public long getAptCode() {
 		return aptCode;
 	}
 
-	public void setAptCode(int aptCode) {
+	public void setAptCode(long aptCode) {
 		this.aptCode = aptCode;
 	}
 
@@ -103,7 +103,7 @@ public class HouseInfoDto {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
+
 	public int getHit() {
 		return hit;
 	}
@@ -112,7 +112,6 @@ public class HouseInfoDto {
 		this.hit = hit;
 	}
 
-
 	public String getRecentPrice() {
 		return recentPrice;
 	}
@@ -120,11 +119,11 @@ public class HouseInfoDto {
 	public void setRecentPrice(String recentPrice) {
 		this.recentPrice = recentPrice;
 	}
-	
+
 	public String getDealAmount() {
 		return dealAmount;
 	}
-	
+
 	public void setDealAmount(String dealAmount) {
 		this.dealAmount = dealAmount;
 	}
@@ -133,8 +132,8 @@ public class HouseInfoDto {
 	public String toString() {
 		return "HouseInfoDto [aptCode=" + aptCode + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName="
 				+ dongName + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", buildYear=" + buildYear
-				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", hit=" + hit + ", recentPrice=" + recentPrice
-				+ ", dealAmount=" + dealAmount + "]";
+				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", hit=" + hit
+				+ ", recentPrice=" + recentPrice + ", dealAmount=" + dealAmount + "]";
 	}
 
 }

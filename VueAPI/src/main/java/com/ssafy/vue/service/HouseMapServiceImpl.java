@@ -37,7 +37,7 @@ public class HouseMapServiceImpl implements HouseMapService {
 	}
 
 	@Override
-	public boolean countUpHouse(int aptcode) throws Exception {
+	public boolean countUpHouse(long aptcode) throws Exception {
 		return houseMapMapper.countUpHouse(aptcode) == 1;
 	}
 
@@ -47,7 +47,7 @@ public class HouseMapServiceImpl implements HouseMapService {
 	}
 
 	@Override
-	public List<HouseDealDto> getAptDeal(int aptCode) {
+	public List<HouseDealDto> getAptDeal(long aptCode) {
 		return houseMapMapper.getAptDeal(aptCode);
 	}
 	
