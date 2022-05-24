@@ -113,7 +113,6 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    beforeEnter: onlyAuthUser,
     component: () => import("@/views/AboutView.vue"),
   },
   {
