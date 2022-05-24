@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-table-simple caption-top>
-          <b-thead head-variant="white">
+          <b-thead head-variant="light">
             <b-tr>
               <b-th>NEW 거래 매물</b-th>
             </b-tr>

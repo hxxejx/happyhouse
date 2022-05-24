@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-table-simple>
-          <b-thead head-variant="white">
+          <b-thead head-variant="light">
             <b-tr>
               <b-th>인기 매물 BEST</b-th>
             </b-tr>

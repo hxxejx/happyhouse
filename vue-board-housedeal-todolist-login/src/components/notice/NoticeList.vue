@@ -13,6 +13,7 @@
           hover
           responsive
           id="list-item"
+          head-variant="light"
           :items="articles"
           :fields="fields"
           :per-page="perPage"

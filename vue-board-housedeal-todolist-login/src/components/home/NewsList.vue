@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-table-simple hover>
-          <b-thead head-variant="white">
+          <b-thead head-variant="light">
             <b-tr>
               <b-th colspan="2">NEWS</b-th>
             </b-tr>
@@ -57,5 +57,8 @@ export default {
 .tdSubject {
   width: 300px;
   text-align: left;
+}
+.title {
+  border-bottom: 1px solid black;
 }
 </style>

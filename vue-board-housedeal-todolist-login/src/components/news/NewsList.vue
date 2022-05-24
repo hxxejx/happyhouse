@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-table-simple hover>
-          <b-thead head-variant="white">
+          <b-thead head-variant="light">
             <b-tr>
               <b-th>제목</b-th>
               <b-th>내용</b-th>
