@@ -8,7 +8,7 @@
           variant="danger"
           role="button"
           @click="viewDealList"
-          >거래내역 보기</b-alert
+          >거래 내역 보기</b-alert
         >
         <b-modal
           id="modal-center"
