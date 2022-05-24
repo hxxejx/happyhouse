@@ -39,10 +39,12 @@
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
 		delete
-		from board, comments
-        using board inner join comments
-		where board.articleno = #{articleno}
-		and comments.check = "1"
+		from board
+		where articleno = #{articleno};
+		delete
+		from comments
+		where articleno = #{articleno}
+		and comments.check = "1";
 	</delete>
 
 	<!-- 글번호로 게시글 검색 -->
