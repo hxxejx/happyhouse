@@ -44,25 +44,25 @@
 	</update>
 
 	<select id="popularHouse" resultType="houseInfoDto">
-		select dongname, aptName, hit
+		select aptCode, dongname, aptName, hit
 		from houseinfo
 		order by hit desc
-		limit 3
+		limit 5
 	</select>
 
 	<select id="getAptDeal" parameterType="long" resultType="HouseDealDto">
 		select aptCode, dealAmount, dealYear, dealMonth, dealDay, area, floor
 		from housedeal
 		where aptCode = #{aptCode}
-		order by no
+		order by no desc
 	</select>
 	
 	<select id="getNewDeal" resultType="HouseInfoDto">
-		select houseinfo.aptName, housedeal.dealAmount
+		select houseinfo.aptCode, houseinfo.aptName, housedeal.dealAmount
 		from houseinfo, housedeal
 		where houseinfo.aptCode = housedeal.aptCode
 		order by dealYear desc, dealMonth desc, dealDay desc
-		limit 3
+		limit 5
 	</select>
 
 </mapper>
