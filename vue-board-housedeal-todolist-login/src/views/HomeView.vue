@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center">
+  <div>
     <b-row>
       <b-col>
         <b-carousel
@@ -7,39 +7,41 @@
           style="text-shadow: 0px 0px 0px #000"
           fade
           indicators
-          img-width="1024"
-          img-height="480"
         >
           <router-link :to="{ name: 'signUp' }">
             <b-carousel-slide
-              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSKUAj%2FbtrCUmrNe99%2FMV7e1BkZhS11tKZJCmM6k1%2Fimg.png"
+              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FXnMbv%2FbtrCY55t2jo%2FWM9NxyIEzFuG8DOynMSSl1%2Fimg.png"
             ></b-carousel-slide>
           </router-link>
-          <a href="https://housing.seoul.go.kr/site/main/content/sh01_040081">
+          <a href="https://www.guud.com/index">
             <b-carousel-slide
-              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbaTWNQ%2FbtrCS1A39ia%2FuOY72dV9sg8afvvqJbgGEK%2Fimg.png"
+              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FKMvuR%2FbtrC3dtI8ux%2FFDMG288BOJX30TkiqfSoK0%2Fimg.png"
             ></b-carousel-slide>
           </a>
-          <a href="https://seoul.childcare.go.kr/ccef/main.jsp">
+          <a
+            href="https://www.moel.go.kr/policy/corona19/detailList.do?tpi_seq=217"
+          >
             <b-carousel-slide
-              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpTyIq%2FbtrCJcX96n7%2FuknuM0BKSBAQ66eB59sK80%2Fimg.png"
+              img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcweHFh%2FbtrCY7vq2C0%2Ftn0YA6KJB3YhgXt8vsA9Lk%2Fimg.png"
             ></b-carousel-slide>
           </a>
         </b-carousel>
       </b-col>
     </b-row>
-    <b-tr>
-      <b-td rowspan="2"><news-list></news-list></b-td>
-      <b-td>
-        <house-list></house-list>
-      </b-td>
-    </b-tr>
-    <b-tr>
-      <b-td>
-        <house-deal-list></house-deal-list>
-      </b-td>
-    </b-tr>
-  </b-container>
+    <b-container>
+      <b-tr>
+        <b-td rowspan="2"><news-list></news-list></b-td>
+        <b-td>
+          <house-list></house-list>
+        </b-td>
+      </b-tr>
+      <b-tr>
+        <b-td>
+          <house-deal-list></house-deal-list>
+        </b-td>
+      </b-tr>
+    </b-container>
+  </div>
 </template>
 
 <script>
