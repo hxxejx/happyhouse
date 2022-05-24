@@ -86,6 +86,11 @@ export default {
       return this.houses.length;
     },
   },
+  watch: {
+    houses: function () {
+      this.currentPage = 1;
+    },
+  },
 };
 </script>
 

@@ -61,6 +61,11 @@ export default {
       return this.deals.length;
     },
   },
+  watch: {
+    deals: function () {
+      this.currentPage = 1;
+    },
+  },
   filters: {
     dateFormat(value) {
       if (value.toString().length === 1) {
