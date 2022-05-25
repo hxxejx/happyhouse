@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="getNewDeal" resultType="HouseInfoDto">
-		select houseinfo.aptCode, houseinfo.aptName, housedeal.dealAmount
+		select houseinfo.aptCode, houseinfo.dongName, houseinfo.aptName, housedeal.dealAmount
 		from houseinfo, housedeal
 		where houseinfo.aptCode = housedeal.aptCode
 		order by dealYear desc, dealMonth desc, dealDay desc
