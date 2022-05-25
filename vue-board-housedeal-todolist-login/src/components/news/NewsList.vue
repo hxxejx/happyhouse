@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-table-simple hover responsive>
+        <b-table-simple hover role="button" responsive>
           <b-thead head-variant="light">
             <b-tr>
               <b-th>제목</b-th>
