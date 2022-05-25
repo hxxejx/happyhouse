@@ -1,7 +1,9 @@
 <template>
   <b-tr>
-    <b-td v-html="title" @click="goToLink" class="font-bold"></b-td>
-    <b-td v-html="description" @click="goToLink" class="font-light"></b-td>
+    <b-td v-html="title" @click="goToLink" class="font-bold"></b-td
+    ><a href="#"
+      ><b-td v-html="description" @click="goToLink" class="font-light"></b-td
+    ></a>
     <b-td>{{ pubDate | dateFormat }}</b-td>
   </b-tr>
 </template>
@@ -36,5 +38,9 @@ export default {
 }
 .font-light {
   font-weight: lighter;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 </style>

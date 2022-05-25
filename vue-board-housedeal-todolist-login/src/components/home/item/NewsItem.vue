@@ -1,6 +1,8 @@
 <template>
   <b-tr>
-    <b-td class="subject" v-html="title" @click="goToLink"></b-td>
+    <a href="#"
+      ><b-td class="subject" v-html="title" @click="goToLink"></b-td
+    ></a>
   </b-tr>
 </template>
 
@@ -22,5 +24,6 @@ export default {
 <style>
 .subject {
   font-weight: lighter;
+  text-decoration: none;
 }
 </style>
