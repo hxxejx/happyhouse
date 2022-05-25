@@ -17,7 +17,8 @@
           v-b-modal.modal-house-deal-list
         >
           <template #cell(aptName)="data">
-            <b @click="selectHouse(data.item)"> {{ data.item.aptName }}</b>
+            {{ data.item.dongName
+            }}<b @click="selectHouse(data.item)"> {{ data.item.aptName }}</b>
             {{ data.item.dealAmount }}만원에 거래되었습니다
           </template>
         </b-table>
