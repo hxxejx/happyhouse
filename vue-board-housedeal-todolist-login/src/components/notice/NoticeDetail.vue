@@ -44,7 +44,7 @@
 <script>
 import { getArticle, deleteArticle } from "@/api/notice";
 import CommentView from "@/views/CommentView.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 const noticeStore = "noticeStore";
@@ -65,10 +65,12 @@ export default {
         check: Number,
       },
       isAdmin: false,
+      currentPage: 0,
     };
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    ...mapState(noticeStore, ["page"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -76,6 +78,8 @@ export default {
     },
   },
   created() {
+    this.currentPage = this.page;
+
     this.countUpArticle(this.$route.params.articleno);
     getArticle(
       this.$route.params.articleno,
@@ -90,6 +94,9 @@ export default {
     this.pdata.articleno = this.$route.params.articleno;
     this.pdata.check = 2;
   },
+  mounted() {
+    this.SET_ARTICLE_PAGE(this.currentPage);
+  },
   updated() {
     if (
       this.userInfo.userid === "admin" ||
@@ -98,8 +105,12 @@ export default {
       this.isAdmin = true;
     }
   },
+  destroyed() {
+    this.SET_ARTICLE_PAGE(1);
+  },
   methods: {
     ...mapActions(noticeStore, ["countUpArticle"]),
+    ...mapMutations(noticeStore, ["SET_ARTICLE_PAGE"]),
     listArticle() {
       this.$router.push({ name: "noticeList" });
     },

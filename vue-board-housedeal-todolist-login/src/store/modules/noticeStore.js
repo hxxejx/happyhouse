@@ -14,13 +14,16 @@ const noticeStore = {
   state: {
     articles: [],
     // article: null,
+    page: 1,
   },
   getters: {},
   mutations: {
     SET_ARTICLE_LIST: (state, articles) => {
       state.articles = articles;
     },
-
+    SET_ARTICLE_PAGE: (state, currentPage) => {
+      state.page = currentPage;
+    },
     // SET_ARTICLE: (state, article) => {
     //   state.article = article;
     // },
@@ -159,9 +162,9 @@ const noticeStore = {
     // },
     countUpArticle: (context, articleno) => {
       countUpArticle(articleno, ({ data }) => {
-        let msg = "조회수 처리시 문제가 발생했습니다.";
+        let msg = "조회수 에러 발생";
         if (data === "success") {
-          msg = "조회수 증가가 완료되었습니다.";
+          msg = "조회수 증가 완료";
         }
         console.log(msg);
       });

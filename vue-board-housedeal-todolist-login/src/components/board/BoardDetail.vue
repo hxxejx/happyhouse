@@ -1,10 +1,10 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <!-- <b-row>
+    <b-row>
       <b-col>
         <b-alert show><h3>글보기</h3></b-alert>
       </b-col>
-    </b-row> -->
+    </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="listArticle">목록</b-button>
@@ -44,7 +44,7 @@
 <script>
 import { getArticle, deleteArticle } from "@/api/board";
 import CommentView from "@/views/CommentView.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 const boardStore = "boardStore";
@@ -65,10 +65,12 @@ export default {
         check: Number,
       },
       isAdmin: false,
+      currentPage: 0,
     };
   },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
+    ...mapState(boardStore, ["page"]),
     message() {
       if (this.article.content)
         return this.article.content.split("\n").join("<br>");
@@ -76,6 +78,7 @@ export default {
     },
   },
   created() {
+    this.currentPage = this.page;
     this.countUpArticle(this.$route.params.articleno);
     getArticle(
       this.$route.params.articleno,
@@ -90,6 +93,9 @@ export default {
     this.pdata.articleno = this.$route.params.articleno;
     this.pdata.check = 1;
   },
+  mounted() {
+    this.SET_ARTICLE_PAGE(this.currentPage);
+  },
   updated() {
     if (
       this.userInfo.userid === "admin" ||
@@ -98,8 +104,13 @@ export default {
       this.isAdmin = true;
     }
   },
+  destroyed() {
+    // console.log("des");
+    this.SET_ARTICLE_PAGE(1);
+  },
   methods: {
     ...mapActions(boardStore, ["countUpArticle"]),
+    ...mapMutations(boardStore, ["SET_ARTICLE_PAGE"]),
     listArticle() {
       this.$router.push({ name: "boardList" });
     },

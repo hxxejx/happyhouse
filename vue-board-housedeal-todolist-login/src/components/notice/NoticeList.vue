@@ -18,38 +18,13 @@
           :fields="fields"
           :per-page="perPage"
           :current-page="currentPage"
+          @row-clicked="goDetail"
+          role="button"
         >
-          <template #cell(subject)="data">
-            <router-link
-              :to="{
-                name: 'noticeDetail',
-                params: { articleno: data.item.articleno },
-              }"
-              >{{ data.item.subject }}</router-link
-            >
-          </template>
           <template #cell(regtime)="data">
             {{ data.item.regtime | dateFormat }}
           </template>
         </b-table>
-        <!-- <b-table-simple hover responsive>
-          <b-thead head-variant="dark">
-            <b-tr>
-              <b-th>글번호</b-th>
-              <b-th>제목</b-th>
-              <b-th>조회수</b-th>
-              <b-th>작성자</b-th>
-              <b-th>작성일</b-th>
-            </b-tr>
-          </b-thead>
-          <tbody>
-            <notice-list-item
-              v-for="article in articles"
-              :key="article.articleno"
-              v-bind="article"
-            />
-          </tbody>
-        </b-table-simple> -->
       </b-col>
     </b-row>
     <notice-search></notice-search>
@@ -66,8 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-// import NoticeListItem from "@/components/notice/item/NoticeListItem";
+import { mapState, mapActions, mapMutations } from "vuex";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
 import moment from "moment";
 
@@ -77,7 +51,6 @@ const memberStore = "memberStore";
 export default {
   name: "NoticeList",
   components: {
-    // NoticeListItem,
     NoticeSearch,
   },
   data() {
@@ -111,13 +84,16 @@ export default {
   },
   created() {
     this.getArticleList();
-
+    this.currentPage = this.page;
     if (this.userInfo.userid === "admin") {
       this.isAdmin = true;
     }
   },
+  destroyed() {
+    this.SET_ARTICLE_PAGE(1);
+  },
   computed: {
-    ...mapState(noticeStore, ["articles"]),
+    ...mapState(noticeStore, ["articles", "page"]),
     ...mapState(memberStore, ["userInfo"]),
     rows() {
       return this.articles.length;
@@ -125,8 +101,16 @@ export default {
   },
   methods: {
     ...mapActions(noticeStore, ["getArticleList"]),
+    ...mapMutations(noticeStore, ["SET_ARTICLE_PAGE"]),
     moveWrite() {
       this.$router.push({ name: "noticeRegister" });
+    },
+    goDetail(record) {
+      this.SET_ARTICLE_PAGE(this.currentPage);
+      this.$router.push({
+        name: "noticeDetail",
+        params: { articleno: record.articleno },
+      });
     },
   },
   filters: {

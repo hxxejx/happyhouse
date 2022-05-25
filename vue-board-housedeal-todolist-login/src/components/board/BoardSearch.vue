@@ -8,6 +8,7 @@
         <b-form-input
           v-model.trim="word"
           placeholder="검색어 입력"
+          @keyup.enter="beforeSearch"
         ></b-form-input>
         <b-button variant="outline-success" @click="beforeSearch">
           검색</b-button

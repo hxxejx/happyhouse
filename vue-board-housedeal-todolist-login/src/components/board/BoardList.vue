@@ -16,16 +16,9 @@
           :fields="fields"
           :per-page="perPage"
           :current-page="currentPage"
+          @row-clicked="goDetail"
+          role="button"
         >
-          <template #cell(subject)="data">
-            <router-link
-              :to="{
-                name: 'boardDetail',
-                params: { articleno: data.item.articleno },
-              }"
-              >{{ data.item.subject }}</router-link
-            >
-          </template>
           <template #cell(regtime)="data">
             {{ data.item.regtime | dateFormat }}
           </template>
@@ -46,7 +39,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import BoardSearch from "@/components/board/BoardSearch.vue";
 import moment from "moment";
 
@@ -86,18 +79,32 @@ export default {
     };
   },
   created() {
+    // console.log("created");
     this.getArticleList();
+    this.currentPage = this.page;
+  },
+  destroyed() {
+    this.SET_ARTICLE_PAGE(1);
   },
   computed: {
-    ...mapState(boardStore, ["articles"]),
+    ...mapState(boardStore, ["articles", "page"]),
     rows() {
       return this.articles.length;
     },
   },
   methods: {
     ...mapActions(boardStore, ["getArticleList"]),
+    ...mapMutations(boardStore, ["SET_ARTICLE_PAGE"]),
     moveWrite() {
       this.$router.push({ name: "boardRegister" });
+    },
+    goDetail(record) {
+      // console.log(this.currentPage);
+      this.SET_ARTICLE_PAGE(this.currentPage);
+      this.$router.push({
+        name: "boardDetail",
+        params: { articleno: record.articleno },
+      });
     },
   },
   filters: {
