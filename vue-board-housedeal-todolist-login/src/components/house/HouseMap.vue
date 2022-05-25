@@ -391,6 +391,11 @@ export default {
       var paginationEl = document.getElementById("pagination"),
         fragment = document.createDocumentFragment(),
         i;
+      var wrapOverlay = document.getElementsByClassName("wrap");
+      console.log(wrapOverlay);
+      for (const wrap of wrapOverlay) {
+        wrap.className = "wrap overlay-off";
+      }
       // 기존에 추가된 페이지번호를 삭제합니다
       while (paginationEl.hasChildNodes()) {
         paginationEl.removeChild(paginationEl.lastChild);
