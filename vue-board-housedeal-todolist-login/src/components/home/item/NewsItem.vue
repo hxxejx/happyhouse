@@ -25,5 +25,6 @@ export default {
 .subject {
   font-weight: lighter;
   text-decoration: none;
+  color: black;
 }
 </style>
