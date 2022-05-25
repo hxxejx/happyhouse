@@ -18,7 +18,13 @@
           :current-page="currentPage"
           @row-clicked="goDetail"
           role="button"
-        >
+          ><template #cell(subject)="data">
+            <span class="badge badge-success mt-1" v-if="data.item.comment > 0"
+              >답변완료</span
+            >
+            <span class="badge badge-secondary mt-1" v-else>답변대기</span>
+            {{ data.item.subject }}
+          </template>
           <template #cell(regtime)="data">
             {{ data.item.regtime | dateFormat }}
           </template>
