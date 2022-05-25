@@ -1,8 +1,6 @@
 <template>
   <b-tr>
-    <a href="#"
-      ><b-td class="subject" v-html="title" @click="goToLink"></b-td
-    ></a>
+    <b-td class="subject" v-html="title" @click="goToLink"></b-td>
   </b-tr>
 </template>
 

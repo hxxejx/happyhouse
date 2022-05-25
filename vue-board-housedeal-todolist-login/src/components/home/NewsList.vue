@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3 text-justify">
     <b-row>
       <b-col>
-        <b-table-simple borderless>
+        <b-table-simple borderless role="button" hover>
           <b-thead class="title">
             <font color="#2E8B57"><b-icon icon="newspaper"></b-icon> NEWS</font>
           </b-thead>
