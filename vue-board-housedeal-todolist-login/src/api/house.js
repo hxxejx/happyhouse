@@ -36,6 +36,10 @@ function newDeal(success, fail) {
   api.get(`/map/new`).then(success).catch(fail);
 }
 
+function detailHouse(params, success, fail) {
+  api.get(`/map/detail`, { params: params }).then(success).catch(fail);
+}
+
 export {
   sidoList,
   gugunList,
@@ -45,4 +49,5 @@ export {
   popularHouse,
   dealList,
   newDeal,
+  detailHouse,
 };

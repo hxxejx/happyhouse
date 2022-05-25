@@ -1,24 +1,24 @@
 <template>
   <b-tr>
-    <b-td>
+    <!-- <b-td>
       {{ dongName }} <b>{{ aptName }}</b> {{ hit }}번 조회되었습니다</b-td
-    >
+    > -->
   </b-tr>
 </template>
 
 <script>
-export default {
-  name: "HouseListItem",
-  props: {
-    dongName: String,
-    aptName: String,
-    hit: Number,
-  },
-};
+// export default {
+//   name: "HouseListItem",
+//   props: {
+//     dongName: String,
+//     aptName: String,
+//     hit: Number,
+//   },
+// };
 </script>
 
 <style scoped>
-.apt {
+/* .apt {
   width: 50px;
 }
 
@@ -29,5 +29,5 @@ export default {
 }
 .blink {
   animation: blink-effect 1s step-end infinite;
-}
+} */
 </style>

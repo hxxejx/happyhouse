@@ -7,6 +7,7 @@ import {
   popularHouse,
   dealList,
   newDeal,
+  detailHouse,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -19,6 +20,8 @@ const houseStore = {
     house: null,
     address: "",
     deals: [],
+    houses1: [],
+    houses2: [],
   },
 
   getters: {},
@@ -203,6 +206,20 @@ const houseStore = {
       newDeal(
         ({ data }) => {
           commit("SET_NEW_DEAL", data);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    getDetailHouse: ({ commit }, aptCode) => {
+      const params = {
+        aptCode: aptCode,
+      };
+      detailHouse(
+        params,
+        ({ data }) => {
+          commit("SET_DETAIL_HOUSE", data);
         },
         (error) => {
           console.log(error);
