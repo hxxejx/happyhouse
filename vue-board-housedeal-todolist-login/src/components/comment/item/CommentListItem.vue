@@ -11,8 +11,8 @@
         <h6 class="mb-0">{{ nowcomment.regtime }}</h6>
       </template>
       <b-card-text
-        >안녕하세요! 신혼부부를 위한 내 집 찾기 프로젝트, 해피하우스입니다.
-        이용에 불편을 드려 죄송합니다.</b-card-text
+        >안녕하세요! 신혼부부를 위한 내 집 찾기 프로젝트,
+        해피하우스입니다.</b-card-text
       >
       <b-card-text>{{ nowcomment.comment }}</b-card-text>
       <b-card-text
