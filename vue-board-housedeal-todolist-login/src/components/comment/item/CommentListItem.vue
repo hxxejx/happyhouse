@@ -16,7 +16,7 @@
       >
       <b-card-text>{{ nowcomment.comment }}</b-card-text>
       <b-card-text
-        >더 자세한 상담을 원하시면 삼성 청년 SW 아카데미(02-3429-5100)으로 문의
+        >더 자세한 상담을 원하시면 삼성 청년 SW 아카데미(02-3429-5100)로 문의
         주세요.</b-card-text
       >
       <template #footer v-if="this.isAdmin">
