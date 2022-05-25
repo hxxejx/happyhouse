@@ -19,4 +19,8 @@ public interface CommentMapper {
 
 	CommentDto getComment(int commentno);
 
+	void cntUp(CommentDto commentDto);
+
+	void cntDown(int commentNo);
+
 }

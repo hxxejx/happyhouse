@@ -21,6 +21,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean create(CommentDto commentDto) {
+		commentMapper.cntUp(commentDto);
 		return commentMapper.create(commentDto) == 1;
 	}
 
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean delete(int commentNo) {
+		commentMapper.cntDown(commentNo);
 		return commentMapper.delete(commentNo) == 1;
 	}
 

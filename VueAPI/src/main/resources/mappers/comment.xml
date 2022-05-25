@@ -22,6 +22,12 @@
 		#{commentno}, #{userid}, #{comment}, now(), #{articleno}, #{check}
 		)
 	</insert>
+	
+	<update id="cntUp" parameterType="commentDto">
+		update board
+		set comment = comment + 1
+		where articleno = #{articleno}
+	</update>
 
 	<!-- 댓글 정보 수정 -->
 	<update id="modify" parameterType="commentDto">
@@ -38,6 +44,15 @@
 		from comments
 		where commentno = #{commentno}
 	</delete>
+	
+	<update id="cntDown" parameterType="int">
+		update board
+		set comment = comment -1
+		where articleno = (
+		select articleno
+		from comments
+		where commentno = #{commentno})
+	</update>
 
 	<!-- commentno에 해당하는 댓글 조회 -->
 	<select id="getComment" parameterType="int" resultType="commentDto">
