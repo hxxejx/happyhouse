@@ -8,6 +8,7 @@
         <b-table
           hover
           responsive
+          borderless
           id="list-item"
           :items="houses"
           :fields="fields"
