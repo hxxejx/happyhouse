@@ -13,13 +13,14 @@
               img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FXnMbv%2FbtrCY55t2jo%2FWM9NxyIEzFuG8DOynMSSl1%2Fimg.png"
             ></b-carousel-slide>
           </router-link>
-          <a href="https://www.guud.com/index">
+          <a href="https://www.guud.com/index" target="_blank">
             <b-carousel-slide
               img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FKMvuR%2FbtrC3dtI8ux%2FFDMG288BOJX30TkiqfSoK0%2Fimg.png"
             ></b-carousel-slide>
           </a>
           <a
             href="https://www.moel.go.kr/policy/corona19/detailList.do?tpi_seq=217"
+            target="_blank"
           >
             <b-carousel-slide
               img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcweHFh%2FbtrCY7vq2C0%2Ftn0YA6KJB3YhgXt8vsA9Lk%2Fimg.png"
