@@ -16,5 +16,6 @@ public interface HouseMapService {
 	List<HouseInfoDto> popularHouse() throws Exception;
 	List<HouseDealDto> getAptDeal(long aptCode);
 	List<HouseInfoDto> getNewDeal() throws Exception;
+	HouseInfoDto getAptDetail(long aptCode);
 	
 }

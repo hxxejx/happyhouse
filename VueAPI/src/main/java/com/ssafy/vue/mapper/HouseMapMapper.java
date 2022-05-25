@@ -17,4 +17,5 @@ public interface HouseMapMapper {
 	List<HouseInfoDto> popularHouse() throws SQLException;
 	List<HouseDealDto> getAptDeal(long aptCode);
 	List<HouseInfoDto> getNewDeal() throws SQLException;
+	HouseInfoDto getAptDetail(long aptCode);
 }

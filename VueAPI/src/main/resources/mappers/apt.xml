@@ -64,5 +64,17 @@
 		order by dealYear desc, dealMonth desc, dealDay desc
 		limit 5
 	</select>
+	
+	<select id="getAptDetail" parameterType="long" resultType="houseInfoDto">
+		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, h.roadName, h.roadNameBonbun, h.roadNameBubun, si.sidoname, gu.gugunname,
+		(select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) =
+		left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where aptCode = #{aptCode}
+	</select>
 
 </mapper>
