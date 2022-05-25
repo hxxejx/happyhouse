@@ -23,8 +23,9 @@
       <div class="text-center">
         본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포
         등을 금합니다.<br />
-        2022 Copyright © <a href="SSAFY.com" class="link">SSAFY.com</a> All
-        Rights Reserved.
+        2022 Copyright ©
+        <a href="http://www.SSAFY.com" class="link">SSAFY.com</a> All Rights
+        Reserved.
       </div>
     </template>
   </b-card>
