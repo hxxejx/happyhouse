@@ -166,7 +166,7 @@ export default {
           content.className = "wrap overlay-off";
         });
         kakao.maps.event.addListener(marker, "click", function () {
-          console.log(position);
+          // console.log(position);
           self.SET_DETAIL_HOUSE(position);
           self.getDealList(position.aptCode);
         });
@@ -226,7 +226,6 @@ export default {
       this.removeAllChildNods(listEl);
       // 지도에 표시되고 있는 마커를 제거합니다
       this.removeMarker();
-      var self = this;
       for (var i = 0; i < places.length; i++) {
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
@@ -234,24 +233,19 @@ export default {
           itemEl = this.getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
+        var content = this.setCustomOverlay(marker, places[i]);
         bounds.extend(placePosition);
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function (marker, title) {
-          kakao.maps.event.addListener(marker, "mouseover", function () {
-            self.displayInfowindow(marker, title);
-          });
-          kakao.maps.event.addListener(marker, "mouseout", function () {
-            self.infowindow.close();
-          });
+        (function (content) {
           itemEl.onmouseover = function () {
-            self.displayInfowindow(marker, title);
+            content.className = "wrap overlay-on";
           };
           itemEl.onmouseout = function () {
-            self.infowindow.close();
+            content.className = "wrap overlay-off";
           };
-        })(marker, places[i].place_name);
+        })(content);
         fragment.appendChild(itemEl);
       }
       // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
@@ -259,6 +253,57 @@ export default {
       menuEl.scrollTop = 0;
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
       this.map.setBounds(bounds);
+    },
+    setCustomOverlay(marker, place) {
+      var content = document.createElement("div");
+      content.className = "wrap overlay-off";
+      var info = document.createElement("div");
+      info.className = "info";
+      var title = document.createElement("div");
+      title.className = "title";
+      title.innerHTML = place.place_name;
+      var body = document.createElement("div");
+      body.className = "body";
+      var img = document.createElement("div");
+      img.className = "img";
+      var src = document.createElement("img");
+      src.src =
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M21 13.242V20h1v2H2v-2h1v-6.758A4.496 4.496 0 0 1 1 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 0 1 .866-.5H18.79a1 1 0 0 1 .866.5l2.702 4.682A4.496 4.496 0 0 1 21 13.242zm-2 .73a4.496 4.496 0 0 1-3.75-1.36A4.496 4.496 0 0 1 12 14.001a4.496 4.496 0 0 1-3.25-1.387A4.496 4.496 0 0 1 5 13.973V20h14v-6.027zM5.789 4L3.356 8.213a2.5 2.5 0 0 0 4.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 0 0 4.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 1 0 4.457-2.232L18.21 4H5.79z'/%3E%3C/svg%3E";
+      src.width = 73;
+      src.height = 70;
+      var desc = document.createElement("div");
+      desc.className = "desc";
+      var ellipsis = document.createElement("div");
+      ellipsis.className = "ellipsis";
+      ellipsis.innerHTML = `${place.address_name}`;
+      var jibun = document.createElement("div");
+      jibun.className = "jibun ellipsis";
+      jibun.innerHTML = `${place.road_address_name}</br>${place.phone}`;
+      content.appendChild(info);
+      info.appendChild(title);
+      info.appendChild(body);
+      body.appendChild(img);
+      img.appendChild(src);
+      body.appendChild(desc);
+      desc.appendChild(ellipsis);
+      desc.appendChild(jibun);
+      // 커스텀 오버레이가 표시될 위치입니다
+      var position = new kakao.maps.LatLng(place.y, place.x);
+      // 커스텀 오버레이를 생성합니다
+      var customOverlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: this.map,
+        position: position,
+        zIndex: 1,
+      });
+      customOverlay.setMap(this.map);
+      kakao.maps.event.addListener(marker, "mouseover", function () {
+        content.className = "wrap overlay-on";
+      });
+      kakao.maps.event.addListener(marker, "mouseout", function () {
+        content.className = "wrap overlay-off";
+      });
+      return content;
     },
     // 검색결과 항목을 Element로 반환하는 함수입니다
     getListItem(index, places) {
@@ -427,7 +472,6 @@ export default {
   text-align: left;
   overflow: hidden;
   font-size: 12px;
-  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
   line-height: 1.5;
 }
 .wrap * {
@@ -453,20 +497,8 @@ export default {
   background: #eee;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
-  font-weight: bold;
+  font-style: normal;
 }
-/* .info .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #888;
-  width: 17px;
-  height: 17px;
-  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
-} */
-/* .info .close:hover {
-  cursor: pointer;
-} */
 .info .body {
   position: relative;
   overflow: hidden;
@@ -514,9 +546,6 @@ export default {
   bottom: 0;
   width: 22px;
   height: 12px;
-}
-.info .link {
-  color: #5085bb;
 }
 .map_wrap,
 .map_wrap * {
