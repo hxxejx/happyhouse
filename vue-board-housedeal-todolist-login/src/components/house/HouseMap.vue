@@ -36,7 +36,6 @@ export default {
       map: null,
       positions: [],
       markers: [],
-      // 추가
       ps: null,
       infowindow: null,
       search_markers: [],
@@ -69,7 +68,6 @@ export default {
       // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
       this.infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
       // 키워드로 장소를 검색합니다
-      // this.searchPlaces();
       this.setPositions();
     },
     setPositions() {
@@ -115,13 +113,6 @@ export default {
         var title = document.createElement("div");
         title.className = "title";
         title.innerHTML = position.aptName;
-        // var close = document.createElement("div");
-        // close.className = "close";
-        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
-        // close.addEventListener("click", function () {
-        //   overlay.setMap(null);
-        // });
-        // close.title = "닫기";
         var body = document.createElement("div");
         body.className = "body";
         var img = document.createElement("div");
@@ -142,7 +133,6 @@ export default {
         content.appendChild(info);
         info.appendChild(title);
         info.appendChild(body);
-        // title.appendChild(close);
         body.appendChild(img);
         img.appendChild(src);
         body.appendChild(desc);
@@ -156,7 +146,6 @@ export default {
           position: marker.getPosition(),
           zIndex: 1,
         });
-
         overlay.setContent(content);
         kakao.maps.event.addListener(marker, "mouseover", function () {
           overlay.setMap(self.map);
@@ -166,7 +155,6 @@ export default {
           content.className = "wrap overlay-off";
         });
         kakao.maps.event.addListener(marker, "click", function () {
-          // console.log(position);
           self.SET_DETAIL_HOUSE(position);
           self.getDealList(position.aptCode);
         });
@@ -255,9 +243,6 @@ export default {
       this.map.setBounds(bounds);
     },
     setCustomOverlay(marker, place) {
-      // console.log(place);
-      //category_name 공원, 어린이집, 반찬 ,장난감, 병원
-
       var content = document.createElement("div");
       content.className = "wrap overlay-off";
       var info = document.createElement("div");
@@ -392,7 +377,6 @@ export default {
         fragment = document.createDocumentFragment(),
         i;
       var wrapOverlay = document.getElementsByClassName("wrap");
-      console.log(wrapOverlay);
       for (const wrap of wrapOverlay) {
         wrap.className = "wrap overlay-off";
       }
@@ -468,12 +452,12 @@ export default {
       script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}&libraries=services`;
       /* global kakao */
       script.addEventListener("load", () => {
-        console.log("loaded", window.kakao);
+        // console.log("loaded", window.kakao);
         kakao.maps.load(this.initMap);
       });
       document.head.appendChild(script);
     } else {
-      console.log("이미 로딩됨: ", window.kakao);
+      // console.log("이미 로딩됨: ", window.kakao);
       this.initMap();
     }
   },
