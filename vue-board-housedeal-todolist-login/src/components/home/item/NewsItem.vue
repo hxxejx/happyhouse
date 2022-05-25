@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     goToLink() {
-      location.href = this.originallink;
+      window.open(this.originallink);
     },
   },
 };
