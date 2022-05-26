@@ -6,14 +6,14 @@
 
 	<!-- 게시글 전체 조회 -->
 	<select id="selectBoard" resultType="board">
-		select articleno, userid, subject, content, hit, regtime
+		select articleno, userid, subject, content, hit, regtime, comment
 		from board
 		order by articleno desc
 	</select>
 
 	<!-- 게시글 상세 조회 -->
 	<select id="selectBoardByNo" resultType="board">
-		select articleno, subject, userid, content, hit, regtime
+		select articleno, subject, userid, content, hit, regtime, comment
 		from board
 		where articleno = #{articleno}
 	</select>
@@ -49,7 +49,7 @@
 
 	<!-- 글번호로 게시글 검색 -->
 	<select id="searchBoardByNo" parameterType="int" resultType="board">
-		select articleno, userid, subject, content, hit, regtime
+		select articleno, userid, subject, content, hit, regtime, comment
 		from board
 		where articleno = #{articleno}
 		order by articleno desc
@@ -57,7 +57,7 @@
 
 	<!-- 제목으로 게시글 검색 -->
 	<select id="searchBoardBySubject" parameterType="string" resultType="board">
-		select articleno, userid, subject, content, hit, regtime
+		select articleno, userid, subject, content, hit, regtime, comment
 		from board
 		where subject like concat('%', #{subject}, '%')
 		order by articleno desc

@@ -17,6 +17,9 @@ public class Board {
 	private int hit;
 	@ApiModelProperty(value = "작성일")
 	private String regtime;
+	private int comment;
+	
+	
 
 	public int getArticleno() {
 		return articleno;
@@ -66,7 +69,15 @@ public class Board {
 		this.regtime = regtime;
 	}
 
-	public Board(int articleno, String userid, String subject, String content, int hit, String regtime) {
+	public int getComment() {
+		return comment;
+	}
+	
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
+	
+	public Board(int articleno, String userid, String subject, String content, int hit, String regtime, int comment) {
 		super();
 		this.articleno = articleno;
 		this.userid = userid;
@@ -74,6 +85,8 @@ public class Board {
 		this.content = content;
 		this.hit = hit;
 		this.regtime = regtime;
+		this.comment = comment;
 	}
+
 
 }
