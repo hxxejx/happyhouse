@@ -71,7 +71,7 @@
 <script>
 /* eslint-disable */
 import { joinMember, findById, updateMember } from "@/api/member";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -98,15 +98,7 @@ export default {
       findById(
         this.userInfo.userid,
         ({ data }) => {
-          // this.article.articleno = data.article.articleno;
-          // this.article.userid = data.article.userid;
-          // this.article.subject = data.article.subject;
-          // this.article.content = data.article.content;
-          this.user = data;
-          this.user.userid = this.userInfo.userid;
-          this.user.userpwd = this.userInfo.userpwd;
-          this.user.username = this.userInfo.username;
-          this.user.email = this.userInfo.email;
+          this.user = data.userInfo;
         },
         (error) => {
           console.log(error);
@@ -116,6 +108,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_USER_INFO"]),
     onSubmit(event) {
       event.preventDefault();
 
@@ -189,6 +182,15 @@ export default {
           let msg = "수정 처리시 문제가 발생했습니다.";
           if (data === "success") {
             msg = "수정이 완료되었습니다.";
+            findById(
+              this.userInfo.userid,
+              ({ data }) => {
+                this.SET_USER_INFO(data.userInfo);
+              },
+              (error) => {
+                console.log(error);
+              },
+            );
           }
           alert(msg);
           this.$router.push({ name: "mypage" });

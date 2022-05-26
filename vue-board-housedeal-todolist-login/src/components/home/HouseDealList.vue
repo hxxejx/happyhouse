@@ -5,6 +5,13 @@
         <font color="#6495ED" class="title"
           ><b-icon icon="bell"></b-icon> NEW!</font
         >
+        <b-spinner
+          v-if="isLoading"
+          small
+          label="Small Spinner"
+          variant="primary"
+          style="margin: 0px 0px 0px 10px"
+        ></b-spinner>
         <b-table
           hover
           responsive
@@ -111,6 +118,11 @@ export default {
     ...mapState(houseStore, ["houses2"]),
     ...mapState(houseStore, ["house", "deals"]),
   },
+  watch: {
+    houses2: function () {
+      this.isLoading = false;
+    },
+  },
   methods: {
     ...mapActions(houseStore, ["getNewDeal"]),
     ...mapActions(houseStore, ["getDetailHouse", "getDealList"]),
@@ -141,6 +153,7 @@ export default {
           },
         },
       ],
+      isLoading: true,
     };
   },
   filters: {
